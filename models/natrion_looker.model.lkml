@@ -16,13 +16,13 @@ explore: coin {}
 
 explore: step_table_sample {
   join: cell_test {
-    type: full_outer
+    type: left_outer
     sql_on: ${step_table_sample.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
 
   join: cycle_table_sample {
-    type: full_outer
+    type: left_outer
     sql_on: ${cycle_table_sample.cell_id} = ${step_table_sample.cell_id} ;;
     relationship: many_to_one
   }
@@ -31,13 +31,13 @@ explore: step_table_sample {
 
 explore: cycle_table_sample {
   join: cell_test {
-    type: full_outer
+    type: left_outer
     sql_on: ${cycle_table_sample.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
 
   join: step_table_sample {
-    type: full_outer
+    type: left_outer
     sql_on: ${cycle_table_sample.cell_id} = ${step_table_sample.cell_id} ;;
     relationship: many_to_one
   }
