@@ -1,5 +1,5 @@
-view: cycle_table_sample {
-  sql_table_name: `Data.Cycle_Table_Sample` ;;
+view: electrical_cycle_coin {
+  sql_table_name: `natrion-operational-data.Data.electrical_cycle_coin` ;;
 
   dimension: capacity_c {
     type: number
@@ -23,42 +23,36 @@ view: cycle_table_sample {
   }
   dimension: energy_c {
     type: number
-    sql: ${TABLE}.EnergyC ;;
+    sql: ${TABLE}.Energy_C ;;
   }
   dimension: energy_d {
     type: number
-    sql: ${TABLE}.EnergyD ;;
+    sql: ${TABLE}.Energy_D ;;
   }
   dimension: first_step {
     type: number
-    sql: ${TABLE}.FirstStep ;;
+    sql: ${TABLE}.First_Step ;;
   }
   dimension: last_step {
     type: number
-    sql: ${TABLE}.LastStep ;;
+    sql: ${TABLE}.Last_Step ;;
   }
   dimension: median_charge_v {
     type: number
-    sql: ${TABLE}.MedianChargeV ;;
+    sql: ${TABLE}.Median_Charge_V ;;
   }
   dimension: median_discharge_v {
     type: number
-    sql: ${TABLE}.MedianDischargeV ;;
+    sql: ${TABLE}.Median_Discharge_V ;;
   }
   dimension: num_steps {
     type: number
-    sql: ${TABLE}.NumSteps ;;
+    sql: ${TABLE}.Num_Steps ;;
   }
   dimension: percent_ccc_capacity {
     type: number
-    sql: ${TABLE}.PercentCCC_Capacity ;;
+    sql: ${TABLE}.Percent_CCC_Capacity ;;
   }
-
-  measure: cycle_measure {
-    type: number
-    sql: ${TABLE}.Cycle ;;
-  }
-
   measure: count {
     type: count
   }

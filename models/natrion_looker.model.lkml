@@ -31,9 +31,9 @@ explore: step_table_sample {
 
 explore: cycle_table_sample {
   join: cell_test {
-    type: left_outer
+    type: inner
     sql_on: ${cycle_table_sample.cell_id} = ${cell_test.cell_id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
 
   join: step_table_sample {
@@ -93,3 +93,27 @@ explore: electrode_mfg_pouch {
     relationship: many_to_one
   }
 }
+
+explore: eis_coin {
+  join: electrical_cycle_coin {
+    type: inner
+    sql_on: ${eis_coin.cell_id} = ${electrical_cycle_coin.cell_id} ;;
+    relationship: one_to_one
+  }
+
+  join: electrical_step_coin {
+    type: inner
+    sql_on: ${eis_coin.cell_id} = ${electrical_step_coin.cell_id} ;;
+    relationship: one_to_one
+  }
+}
+
+explore: eis_pouch {}
+
+explore: electrical_cycle_coin {}
+
+explore: electrical_cycle_pouch {}
+
+explore: electrical_step_coin {}
+
+explore: electrical_step_pouch {}
