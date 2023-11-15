@@ -38,7 +38,7 @@ view: step_table_sample {
     sql: ${TABLE}.Time ;;
   }
 
-  dimension: time_ {
+  dimension: delta_time_ {
     type: number
     sql: ${TABLE}.Time/3600 ;;
   }
