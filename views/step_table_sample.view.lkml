@@ -43,6 +43,11 @@ view: step_table_sample {
     sql: ${TABLE}.Time/3600 ;;
   }
 
+  measure: step_count {
+    type: count_distinct
+    sql: ${step};;
+  }
+
 
   measure: count {
     type: count
