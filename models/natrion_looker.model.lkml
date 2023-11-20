@@ -53,6 +53,13 @@ explore: cell_build {
     relationship: one_to_one
   }
 
+  join: casts {
+    type: inner
+     sql_on: ${cell_build.cathode_id} = ${casts.cast_id}} ;;
+    relationship: one_to_one
+
+  }
+
   join: pre_build_pouch {
     type: left_outer
     sql_on: ${cell_build.cell_id} = ${pre_build_pouch.cell_id} ;;
@@ -65,6 +72,7 @@ explore: electrode_mfg_coin {
     type: inner
     sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
     relationship: many_to_many
+
   }
 
   join: cell_build {
