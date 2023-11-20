@@ -59,6 +59,13 @@ explore: cell_build {
     relationship: one_to_one
   }
 
+  join: casts {
+    type: inner
+    sql_on: ${cell_build.cathode_id} = ${casts.cast_id}} ;;
+    relationship: one_to_one
+
+  }
+
 
 
   join: pre_build_pouch {
