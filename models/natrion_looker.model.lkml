@@ -96,6 +96,12 @@ explore: pre_build_pouch {
     sql_on: ${pre_build_pouch.cathode_id} = ${electrode_mfg_pouch.electrode_id} ;;
     relationship: many_to_one
   }
+
+  join: cell_build {
+    type: left_outer
+    sql_on: ${cell_build.cell_id} = ${pre_build_pouch.cell_id}  ;;
+    relationship: many_to_one
+  }
 }
 
 explore: cell_test {}
