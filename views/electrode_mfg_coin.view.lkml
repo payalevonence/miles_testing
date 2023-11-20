@@ -3,6 +3,7 @@ view: electrode_mfg_coin {
 
   dimension: cast_id {
     type: string
+    primary_key: yes
     sql: ${TABLE}.cast_id ;;
   }
   dimension: component {
@@ -32,11 +33,6 @@ view: electrode_mfg_coin {
   dimension: user_id {
     type: string
     sql: ${TABLE}.user_id ;;
-  }
-
-  measure: total_mass {
-    type: number
-    sql: ${casts.actual_mass_loading} * ${electrode_mfg_coin.electrode_footprint} ;;
   }
 
 

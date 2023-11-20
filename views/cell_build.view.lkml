@@ -15,6 +15,7 @@ view: cell_build {
   }
   dimension: cell_id {
     type: string
+    primary_key: yes
     sql: ${TABLE}.cell_id ;;
   }
   dimension: cell_type {

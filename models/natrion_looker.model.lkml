@@ -46,40 +46,11 @@ explore: cycle_table_sample {
 
 explore: pouchsample {}
 
-explore: cell_build {
-  join: electrode_mfg_coin {
-    type: inner
-    sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
-    relationship: one_to_one
-  }
-
-  join: cycle_table_sample {
-    type: inner
-    sql_on: ${cell_build.cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: one_to_one
-  }
-
-  join: casts {
-    type: inner
-    sql_on: ${cell_build.cathode_id} = ${casts.cast_id}} ;;
-    relationship: one_to_one
-
-  }
-
-
-
-  join: pre_build_pouch {
-    type: left_outer
-    sql_on: ${cell_build.cell_id} = ${pre_build_pouch.cell_id} ;;
-    relationship: many_to_one
-  }
-}
-
 explore: electrode_mfg_coin {
   join: casts {
     type: inner
     sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
-    relationship: many_to_many
+    relationship: one_to_one
 
   }
 
@@ -110,6 +81,15 @@ explore: pre_build_pouch {
     sql_on: ${cell_build.cell_id} = ${pre_build_pouch.cell_id}  ;;
     relationship: many_to_one
   }
+}
+
+explore: cell_build {
+  join: electrode_mfg_coin {
+    type: inner
+    sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
+    relationship: one_to_one
+  }
+
 }
 
 explore: cell_test {}
