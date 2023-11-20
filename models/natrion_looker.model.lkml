@@ -90,6 +90,12 @@ explore: cell_build {
     relationship: one_to_one
   }
 
+  join: cycle_table_sample {
+    type: inner
+    sql_on: ${cell_build.cell_id} = ${cycle_table_sample.cell_id} ;;
+    relationship: one_to_one
+  }
+
 }
 
 explore: cell_test {}
