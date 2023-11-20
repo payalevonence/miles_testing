@@ -64,7 +64,7 @@ explore: electrode_mfg_coin {
   join: casts {
     type: inner
     sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
-    relationship: one_to_one
+    relationship: many_to_many
   }
 
   join: cell_build {
@@ -74,7 +74,13 @@ explore: electrode_mfg_coin {
   }
 }
 
-explore: casts {}
+explore: casts {
+  join: electrode_mfg_coin {
+    type: inner
+    sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
+    relationship: many_to_many
+  }
+}
 
 explore: pre_build_pouch {
   join: electrode_mfg_pouch {
@@ -88,9 +94,9 @@ explore: cell_test {}
 
 explore: electrode_mfg_pouch {
   join: casts {
-    type: left_outer
+    type: inner
     sql_on: ${casts.cast_id} = ${electrode_mfg_pouch.cast_id} ;;
-    relationship: many_to_one
+    relationship: many_to_many
   }
 }
 

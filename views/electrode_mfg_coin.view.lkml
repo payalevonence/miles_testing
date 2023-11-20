@@ -3,7 +3,6 @@ view: electrode_mfg_coin {
 
   dimension: cast_id {
     type: string
-    # hidden: yes
     sql: ${TABLE}.cast_id ;;
   }
   dimension: component {
@@ -34,8 +33,8 @@ view: electrode_mfg_coin {
     type: string
     sql: ${TABLE}.user_id ;;
   }
+
   measure: count {
     type: count
-    drill_fields: [casts.cast_id]
   }
 }
