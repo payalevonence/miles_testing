@@ -36,10 +36,18 @@ view: electrode_mfg_coin {
   }
 
 
+  #measure: total_mass {
+  #  type: number
+  #  sql: ${casts.actual_mass_loading} * ${electrode_mfg_coin.electrode_footprint} ;;
+  #}
+
+
 
   measure: count {
     type: count
   }
+
+
 
 
 }

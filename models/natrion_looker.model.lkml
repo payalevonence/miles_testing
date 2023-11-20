@@ -46,20 +46,7 @@ explore: cycle_table_sample {
 
 explore: pouchsample {}
 
-explore: electrode_mfg_coin {
-  join: casts {
-    type: inner
-    sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
-    relationship: one_to_one
 
-  }
-
-  join: cell_build {
-    type: inner
-    sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
-    relationship: one_to_one
-  }
-}
 
 explore: casts {
   join: electrode_mfg_coin {
@@ -96,6 +83,22 @@ explore: cell_build {
     relationship: one_to_one
   }
 
+}
+
+
+explore: electrode_mfg_coin {
+  join: casts {
+    type: inner
+    sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
+    relationship: one_to_one
+
+  }
+
+  join: cell_build {
+    type: inner
+    sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
+    relationship: one_to_one
+  }
 }
 
 explore: cell_test {}
