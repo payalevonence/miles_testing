@@ -48,9 +48,9 @@ explore: pouchsample {}
 
 explore: cell_build {
   join: electrode_mfg_coin {
-    type: left_outer
+    type: inner
     sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
 
   join: pre_build_pouch {
@@ -62,15 +62,15 @@ explore: cell_build {
 
 explore: electrode_mfg_coin {
   join: casts {
-    type: left_outer
+    type: inner
     sql_on: ${electrode_mfg_coin.cast_id} = ${casts.cast_id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
 
   join: cell_build {
-    type: left_outer
+    type: inner
     sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
-    relationship: many_to_one
+    relationship: one_to_one
   }
 }
 
