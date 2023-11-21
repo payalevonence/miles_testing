@@ -74,8 +74,21 @@ view: electrode_mfg_pouch {
     type: string
     sql: ${TABLE}.user_id ;;
   }
+
+  #measure: multiplied_values {
+  #  type: number
+  #  sql: ${electrode_mfg_pouch.electrode_footprint} * ${pre_build_pouch.number_of_layers} ;;
+  #}
+
+
+
+
+
+
   measure: count {
     type: count
     drill_fields: [casts.cast_id]
   }
+
+
 }
