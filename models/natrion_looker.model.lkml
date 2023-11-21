@@ -73,11 +73,9 @@ explore: electrical_step_coin {}
 
 explore: electrical_step_pouch {}
 
-explore: lisic_separators {}
 
-explore: experiments {}
 
-explore: users {}
+
 
 explore: slurries {}
 
@@ -266,3 +264,157 @@ explore: protocols {
     relationship: many_to_many
   }
 }
+
+explore: experiments {
+  join: casts {
+    type: inner
+    sql_on: ${experiments.experiment_id} = ${casts.experiment_id} ;;
+    relationship: one_to_many
+  }
+
+  join: pre_build_pouch {
+    type: inner
+    sql_on: ${experiments.experiment_id} = ${pre_build_pouch.experiment_id} ;;
+    relationship: one_to_many
+  }
+
+  join: campaigns {
+    type: inner
+    sql_on: ${experiments.campaign_id} = ${campaigns.campaign_id} ;;
+    relationship: many_to_one
+  }
+
+  join: slurries {
+    type: inner
+    sql_on: ${experiments.experiment_id} = ${slurries.experiment_id} ;;
+    relationship: one_to_many
+  }
+
+  join: cell_build {
+    type: inner
+    sql_on: ${experiments.experiment_id} = ${cell_build.experiment_id} ;;
+    relationship: one_to_many
+
+  }
+}
+
+explore: campaigns {
+  join: experiments {
+    type: inner
+    sql_on: ${campaigns.campaign_id} = ${experiments.campaign_id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: users {
+  join: cell_build {
+  type: inner
+  sql_on: ${users.user_id} = ${cell_build.user_id} ;;
+  relationship: many_to_one
+  }
+
+  join: cell_test {
+    type: inner
+    sql_on: ${users.user_id} = ${cell_test.user_id} ;;
+    relationship: one_to_many
+  }
+
+  join: casts {
+    type: inner
+    sql_on: ${users.user_id} = ${casts.user_id} ;;
+    relationship: one_to_many
+  }
+
+  join: electrolyte_mfg {
+    type: inner
+    sql_on: ${users.user_id} = ${electrolyte_mfg.user_id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: recipes {
+  join: slurries {
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${slurries.recipe_id} ;;
+    relationship: one_to_many
+  }
+
+  join: casts {
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${casts.recipe_id} ;;
+    relationship: one_to_many
+  }
+
+  join: lisic_separators {
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${lisic_separators.recipe_id} ;;
+    relationship: one_to_many
+  }
+
+  join: stock_solutions {
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${stock_solutions.recipe_id} ;;
+    relationship: one_to_many
+  }
+
+  join: electrolyte_mfg {
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${electrolyte_mfg.recipe_id} ;;
+    relationship: one_to_many
+  }
+
+  join: lisic_slurries{
+    type: inner
+    sql_on: ${recipes.recipe_id} = ${lisic_separators.recipe_id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: lisic_separators {
+  join: cell_build {
+    type: inner
+    sql_on: ${lisic_separators.membrane_id} = ${cell_build.seperator_id} ;;
+    relationship: one_to_many
+  }
+
+  join: sop {
+    type: inner
+    sql_on: ${lisic_separators.sop_id} = ${sop.sop_id} ;;
+    relationship: many_to_one
+  }
+
+  join: supplies {
+    type: inner
+    sql_on: ${lisic_separators.supply_id} = ${supplies.supply_id} ;;
+    relationship: many_to_one
+  }
+
+  join: recipes {
+    type: inner
+    sql_on: ${lisic_separators.recipe_id} = ${recipes.recipe_id} ;;
+    relationship: many_to_one
+  }
+
+  join: lisic_slurries {
+    type: inner
+    sql_on: ${lisic_separators.lisic_slurry_id} = ${lisic_slurries.lisic_slurry_id} ;;
+    relationship: many_to_one
+  }
+
+  join: experiments {
+    type: inner
+    sql_on: ${lisic_separators.experiment_id} = ${experiments.experiment_id} ;;
+    relationship: many_to_one
+  }
+
+}
+
+explore: lisic_slurries {}
+
+explore: stock_solutions {}
+
+explore: sop {}
+
+explore: electrolyte_mfg {}
+
+explore: supplies {}
