@@ -81,7 +81,7 @@ explore: users {}
 
 explore: slurries {}
 
-explore: protocols {}
+
 
 explore: electrode_mfg_coin {
   join: casts {
@@ -256,5 +256,13 @@ explore: cell_test {
     type: inner
     sql_on: ${cell_test.user_id} = ${users.user_id} ;;
     relationship: many_to_one
+  }
+}
+
+explore: protocols {
+  join: cell_test {
+    type: inner
+    sql_on: ${protocols.protocol_id} = ${cell_test.protocol_id} ;;
+    relationship: many_to_many
   }
 }
