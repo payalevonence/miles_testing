@@ -77,10 +77,6 @@ explore: electrical_step_pouch {}
 
 
 
-explore: slurries {}
-
-
-
 explore: electrode_mfg_coin {
   join: casts {
     type: inner
@@ -409,12 +405,172 @@ explore: lisic_separators {
 
 }
 
-explore: lisic_slurries {}
+explore: stock_solutions {
+  join: lisic_slurries {
+    type: inner
+    sql_on: ${stock_solutions.stock_solution_id} = ${lisic_slurries.salt_stock_solution_id} ;;
+    relationship: one_to_many
+  }
 
-explore: stock_solutions {}
+  join: slurries {
+    type: inner
+    sql_on: ${lisic_slurries.salt_stock_solution_id} = ${slurries.stock_solution_id} ;;
+    relationship: one_to_many
+  }
 
-explore: sop {}
+  join: recipes {
+    type: inner
+    sql_on: ${stock_solutions.recipe_id} =  ${recipes.recipe_id};;
+    relationship: many_to_one
+  }
+}
 
-explore: electrolyte_mfg {}
+explore: sop {
+  join: lisic_slurries {
+    type: inner
+    sql_on: ${sop.sop_id} = ${lisic_slurries.sop_id} ;;
+    relationship: one_to_many
+  }
 
-explore: supplies {}
+  join: lisic_separators {
+    type: inner
+    sql_on: ${sop.sop_id} = ${lisic_separators.sop_id} ;;
+    relationship: one_to_many
+  }
+}
+
+explore: electrolyte_mfg {
+  join: recipes {
+    type: inner
+    sql_on: ${electrolyte_mfg.recipe_id} = ${recipes.recipe_id} ;;
+    relationship: many_to_one
+  }
+
+  join: pre_build_pouch {
+    type: inner
+    sql_on: ${electrolyte_mfg.electolyte_id} = ${pre_build_pouch.electolyte_id} ;;
+    relationship: one_to_many
+  }
+
+  join: users {
+    type: inner
+    sql_on: ${electrolyte_mfg.user_id} = ${users.user_id} ;;
+    relationship: many_to_one
+  }
+
+  join: supplies {
+    type: inner
+    sql_on: ${electrolyte_mfg.cots_electrolyte_id_} = ${supplies.supply_id} ;;
+    relationship: one_to_one
+  }
+}
+
+explore: slurries {
+  join: casts {
+    type: inner
+    sql_on: ${slurries.slurry_id} = ${casts.slurry_id} ;;
+    relationship: one_to_many
+  }
+
+  join: recipes {
+    type: inner
+    sql_on: ${slurries.recipe_id} = ${recipes.recipe_id} ;;
+    relationship: many_to_one
+  }
+
+  join: stock_solutions {
+    type: inner
+    sql_on: ${slurries.stock_solution_id} = ${stock_solutions.stock_solution_id} ;;
+    relationship: many_to_one
+  }
+
+  join: cell_build {
+    type: inner
+    sql_on: ${slurries.user_id} = ${cell_build.user_id} ;;
+    relationship: many_to_one
+  }
+
+  join: experiments {
+    type: inner
+    sql_on: ${slurries.experiment_id} = ${experiments.experiment_id} ;;
+    relationship: many_to_one
+  }
+
+  join: supplies {
+    type: inner
+    sql_on: ${slurries.active_material_id} = ${supplies.supply_id} AND
+    ${slurries.conductive_material_id} = ${supplies.supply_id} AND
+    ${slurries.solvent_id} = ${supplies.supply_id} ;;
+    relationship: many_to_one
+  }
+}
+
+explore: supplies {
+  join: lisic_separators {
+    type: inner
+    sql_on: ${supplies.supply_id} = ${lisic_separators.supply_id} ;;
+    relationship: one_to_many
+  }
+
+  join: casts {
+    type: inner
+    sql_on: ${supplies.supply_id} = ${casts.supply_id} ;;
+    relationship: one_to_many
+  }
+
+  join: electrolyte_mfg {
+    type: inner
+    sql_on: ${supplies.supply_id} = ${electrolyte_mfg.cots_electrolyte_id_} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.solvent_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.cosolvent_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.diluent_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.salts_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.additive1_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.additive2_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.additive3_id} AND
+    ${supplies.supply_id} = ${electrolyte_mfg.additive4_id};;
+    relationship: one_to_many
+  }
+
+  join: lisic_slurries {
+    type: inner
+    sql_on: ${supplies.supply_id} = ${lisic_slurries.salt_id} AND
+    ${supplies.supply_id} = ${lisic_slurries.polymer_id}_id} AND
+    ${supplies.supply_id} = ${lisic_slurries.solvent_id} AND
+    ${supplies.supply_id} = ${lisic_slurries.alumino_silicate_id};;
+    relationship: one_to_many
+  }
+}
+
+explore: lisic_slurries {
+  join: lisic_separators {
+    type: inner
+    sql_on: ${lisic_slurries.lisic_slurry_id} = ${lisic_separators.lisic_slurry_id} ;;
+    relationship: one_to_many
+  }
+
+  join: sop {
+    type: inner
+    sql_on: ${lisic_separators.sop_id} = ${sop.sop_id} ;;
+    relationship: many_to_one
+  }
+
+  join: recipes {
+    type: inner
+    sql_on: ${lisic_separators.recipe_id} = ${recipes.recipe_id} ;;
+    relationship: many_to_one
+  }
+
+  join: stock_solutions {
+    type: inner
+    sql_on: ${lisic_slurries.polymer_stock_solution_id} = ${stock_solutions.stock_solution_id} AND
+    ${lisic_slurries.salt_stock_solution_id} = ${stock_solutions.stock_solution_id};;
+    relationship: many_to_one
+  }
+
+  join: experiments {
+    type: inner
+    sql_on: ${lisic_slurries.experiment_id} = ${experiments.experiment_id} ;;
+    relationship: many_to_one
+  }
+}
