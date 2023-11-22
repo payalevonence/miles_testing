@@ -22,11 +22,22 @@ explore: step_table_sample {
   }
 
   join: cycle_table_sample {
-    type: left_outer
+    type: inner
     sql_on: ${cycle_table_sample.cell_id} = ${step_table_sample.cell_id} ;;
     relationship: many_to_one
   }
 
+  join: electrical_cycle_pouch {
+    type: inner
+    sql_on: ${step_table_sample.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: electrical_step_pouch {
+    type: inner
+    sql_on: ${step_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: cycle_table_sample {
@@ -37,17 +48,55 @@ explore: cycle_table_sample {
   }
 
   join: step_table_sample {
-    type: left_outer
-    sql_on: ${cycle_table_sample.cell_id} = ${step_table_sample.cell_id} ;;
+    type: inner
+    sql_on: ${step_table_sample.cell_id} = ${cycle_table_sample.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: electrical_cycle_pouch {
+    type: inner
+    sql_on: ${cycle_table_sample.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: electrical_step_pouch {
+    type: inner
+    sql_on: ${cycle_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+}
+
+
+explore: electrical_cycle_pouch {
+  join: cycle_table_sample {
+    type: inner
+    sql_on: ${electrical_cycle_pouch.cell_id} = ${cycle_table_sample.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: electrical_step_pouch {
+    type: inner
+    sql_on: ${electrical_cycle_pouch.cell_id} = ${electrical_step_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+}
+
+explore: electrical_step_pouch {
+  join: cycle_table_sample {
+    type: inner
+    sql_on: ${electrical_step_pouch.cell_id} = ${cycle_table_sample.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: electrical_cycle_pouch {
+    type: inner
+    sql_on: ${electrical_step_pouch.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
     relationship: many_to_one
   }
 }
 
 
 explore: pouchsample {}
-
-
-
 
 explore: eis_coin {
   join: electrical_cycle_coin {
@@ -67,11 +116,11 @@ explore: eis_pouch {}
 
 explore: electrical_cycle_coin {}
 
-explore: electrical_cycle_pouch {}
+
 
 explore: electrical_step_coin {}
 
-explore: electrical_step_pouch {}
+
 
 
 
