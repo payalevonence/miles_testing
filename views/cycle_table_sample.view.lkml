@@ -54,6 +54,11 @@ view: cycle_table_sample {
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 
+  #measure: CapC {
+  #  type:number
+  #  sql: ${cycle_table_sample.capacity_c} * 1000/${specific_capacity_vs_cycle.total_mass}
+  #}
+
   measure: cycle_measure {
     type: number
     sql: ${TABLE}.Cycle ;;

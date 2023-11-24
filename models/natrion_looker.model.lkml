@@ -14,6 +14,14 @@ explore: pouch {}
 
 explore: coin {}
 
+explore: specific_capacity_vs_cycle {
+  join: cycle_table_sample  {
+    type: inner
+    sql_on: ${specific_capacity_vs_cycle.cell_build_cell_id} = ${cycle_table_sample.cell_id} ;;
+    relationship: many_to_one
+  }
+}
+
 explore: step_table_sample {
   join: cell_test {
     type: left_outer
@@ -36,6 +44,12 @@ explore: step_table_sample {
   join: electrical_step_pouch {
     type: inner
     sql_on: ${step_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: specific_capacity_vs_cycle {
+    type: inner
+    sql_on: ${step_table_sample.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
     relationship: many_to_one
   }
 }
@@ -64,6 +78,12 @@ explore: cycle_table_sample {
     sql_on: ${cycle_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
     relationship: many_to_one
   }
+
+  join: specific_capacity_vs_cycle {
+    type: inner
+    sql_on: ${cycle_table_sample.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 
@@ -79,6 +99,12 @@ explore: electrical_cycle_pouch {
     sql_on: ${electrical_cycle_pouch.cell_id} = ${electrical_step_pouch.cell_id} ;;
     relationship: many_to_one
   }
+
+  join: specific_capacity_vs_cycle {
+    type: inner
+    sql_on: ${electrical_cycle_pouch.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: electrical_step_pouch {
@@ -91,6 +117,12 @@ explore: electrical_step_pouch {
   join: electrical_cycle_pouch {
     type: inner
     sql_on: ${electrical_step_pouch.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+
+  join: specific_capacity_vs_cycle {
+    type: inner
+    sql_on: ${electrical_step_pouch.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
     relationship: many_to_one
   }
 }
@@ -188,6 +220,12 @@ explore: cell_build {
   join: experiments {
     type: inner
     sql_on: ${cell_build.experiment_id} = ${experiments.experiment_id} ;;
+    relationship: many_to_one
+  }
+
+  join: specific_capacity_vs_cycle {
+    type: inner
+    sql_on: ${cell_build.cell_type} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
     relationship: many_to_one
   }
 
@@ -623,3 +661,15 @@ explore: lisic_slurries {
     relationship: many_to_one
   }
 }
+
+explore: trial1 {}
+
+explore: trial2 {}
+
+explore: Trial3 {}
+
+explore:trial_pouch {}
+
+explore:: trialpouch1 {}
+
+explore: median_asr_coin {}
