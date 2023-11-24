@@ -24,7 +24,10 @@ view: median_asr_coin {
           4,
           5,
           6,
-          7
+          7,
+          8,
+          9,
+          10
       ORDER BY
           5 DESC
       LIMIT 500 ;;
@@ -35,10 +38,10 @@ view: median_asr_coin {
     drill_fields: [detail*]
   }
 
-  #measure: cycle1 {
-  #  type: number
-  #  sql: ${cycle} * 1 ;;
-  #}
+  measure: cycle1 {
+    type: number
+    sql: ${step} * 1 ;;
+  }
 
   dimension: step_table_sample_median_v {
     type: number
@@ -79,7 +82,7 @@ view: median_asr_coin {
   dimension: step {
     type: number
     label: "cycle"
-    sql: ${TABLE}.Step ;;
+    sql: ${TABLE}.step ;;
   }
 
   dimension: step_current {
