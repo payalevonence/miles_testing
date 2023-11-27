@@ -45,10 +45,11 @@ view: Trial3 {
     sql: ${cycle} * 1 ;;
   }
 
-  measure: specific_capacity_C {
-    type: number
-    sql: Cycle_Table_Sample.CapacityC *1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) ;;
-  }
+
+
+
+
+
 
   measure: CapacityC11 {
     type: number
