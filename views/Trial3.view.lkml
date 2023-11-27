@@ -12,7 +12,8 @@ view: Trial3 {
           Cycle_Table_Sample.CapacityD *1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) as capd,
           Cycle_Table_Sample.Cycle AS Cycle,
           cell_build.cell_id  AS cell_build_cell_id,
-          cell_test.test_date as test_date
+          cell_test.test_date as test_date,
+          cell_test.protocol_id as protocol_id
       FROM `natrion-operational-data.operational_data.electrode_mfg_coin`  AS electrode_mfg_coin
       INNER JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_coin.cast_id = casts.cast_id
       INNER JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON electrode_mfg_coin.electrode_id = cell_build.cathode_id
@@ -60,6 +61,11 @@ view: Trial3 {
   dimension: electrode_footprint {
     type: number
     sql: ${TABLE}.electrode_footprint ;;
+  }
+
+  dimension: protocol_id {
+    type: string
+    sql: ${TABLE}.protocol_id ;;
   }
 
   dimension_group: test {
