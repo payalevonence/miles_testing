@@ -30,7 +30,8 @@ view: Trial3 {
           8,
           9,
           10,
-          11
+          11,
+          12
       ORDER BY
           1
       LIMIT 500 ;;
