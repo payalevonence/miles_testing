@@ -674,4 +674,6 @@ explore:: trialpouch1 {}
 
 explore: median_asr_coin {}
 
+explore: pdt_medianasr {}
+
 explore: trial_median_asr {}
