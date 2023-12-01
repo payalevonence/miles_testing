@@ -93,11 +93,6 @@ view: pdt_medianasr {
     sql: ${TABLE}.Median_ASR / 1000 ;;
   }
 
-  dimension: median_asr1 {
-    type: number
-    primary_key: yes
-    sql: ${TABLE}.Median_ASR / 1000 ;;
-  }
 
 
   set: detail {
