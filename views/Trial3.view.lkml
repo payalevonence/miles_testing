@@ -47,12 +47,6 @@ view: Trial3 {
     sql: ${cycle} * 1 ;;
   }
 
-
-
-
-
-
-
   measure: CapacityC11 {
     type: number
     sql: ${Trial3.capacity_c}*1000/${Trial3.total_mass} ;;

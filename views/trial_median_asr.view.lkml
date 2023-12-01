@@ -90,7 +90,7 @@ view: trial_median_asr {
 
   dimension: median_asr {
     type: number
-    sql: ${TABLE}.Median_ASR ;;
+    sql: ${TABLE}.Median_ASR / 1000 ;;
   }
 
   set: detail {
