@@ -181,6 +181,7 @@ explore: cell_build {
     relationship: one_to_one
   }
 
+
   join: electrode_mfg_coin {
     type: inner
     sql_on: ${cell_build.cathode_id} = ${electrode_mfg_coin.electrode_id} ;;
@@ -315,6 +316,12 @@ explore: pre_build_pouch {
   join: experiments {
     type: inner
     sql_on: ${pre_build_pouch.experiment_id} = ${experiments.experiment_id} ;;
+    relationship: many_to_one
+  }
+
+  join: step_table_sample {
+    type: inner
+    sql_on: ${step_table_sample.cell_id} = ${pre_build_pouch.cell_id} ;;
     relationship: many_to_one
   }
 

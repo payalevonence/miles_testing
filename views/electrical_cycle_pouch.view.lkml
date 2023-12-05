@@ -1,5 +1,5 @@
 view: electrical_cycle_pouch {
-  sql_table_name: `natrion-operational-data.Data.electrical_cycle_pouch` ;;
+  sql_table_name: `natrion-operational-data.data.electrical_cycle_pouch` ;;
 
   dimension: capacity_c {
     type: number
@@ -15,7 +15,7 @@ view: electrical_cycle_pouch {
   }
   dimension: cell_id {
     type: string
-    sql: ${TABLE}.Cell_id ;;
+    sql: ${TABLE}.Cell_Id ;;
   }
   dimension: cycle {
     type: number
@@ -23,35 +23,40 @@ view: electrical_cycle_pouch {
   }
   dimension: energy_c {
     type: number
-    sql: ${TABLE}.Energy_C ;;
+    sql: ${TABLE}.EnergyC ;;
   }
   dimension: energy_d {
     type: number
-    sql: ${TABLE}.Energy_D ;;
+    sql: ${TABLE}.EnergyD ;;
   }
   dimension: first_step {
     type: number
-    sql: ${TABLE}.First_Step ;;
+    sql: ${TABLE}.FirstStep ;;
   }
   dimension: last_step {
     type: number
-    sql: ${TABLE}.Last_Step ;;
+    sql: ${TABLE}.LastStep ;;
   }
   dimension: median_charge_v {
     type: number
-    sql: ${TABLE}.Median_Charge_V ;;
+    sql: ${TABLE}.MedianChargeV ;;
   }
   dimension: median_discharge_v {
     type: number
-    sql: ${TABLE}.Median_Discharge_V ;;
+    sql: ${TABLE}.MedianDischargeV ;;
   }
   dimension: num_steps {
     type: number
-    sql: ${TABLE}.Num_Steps ;;
+    sql: ${TABLE}.NumSteps ;;
   }
   dimension: percent_ccc_capacity {
     type: number
-    sql: ${TABLE}.Percent_CCC_Capacity ;;
+    sql: ${TABLE}.PercentCCC_Capacity ;;
+  }
+
+  measure: cycle_pouch {
+    type: number
+    sql: ${cycle} * 1 ;;
   }
   measure: count {
     type: count

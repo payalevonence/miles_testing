@@ -9,6 +9,7 @@ view: pdt_medianasr {
                       Step_Table_Sample_with_Cycle_Column.Mode  AS step_table_sample_mode,
                       Step_Table_Sample_with_Cycle_Column.Cell_id  AS step_table_sample_cell_id,
                       cell_test.test_date as test_date,
+                      Step_Table_Sample_with_Cycle_Column.step AS Step,
                       Step_Table_Sample_with_Cycle_Column.cycle as Step_Table_Sample_with_Cycle_Column_cycle,
                       Step_Table_Sample_with_Cycle_Column.Capacity / Step_Table_Sample_with_Cycle_Column.Time as step_current,
                       Step_Table_Sample_with_Cycle_Column.MedianV / (Step_Table_Sample_with_Cycle_Column.Capacity / Step_Table_Sample_with_Cycle_Column.Time) * electrode_mfg_coin.electrode_footprint as Median_ASR
@@ -27,7 +28,8 @@ view: pdt_medianasr {
                       7,
                       8,
                       9,
-                      10
+                      10,
+                      11
                   ORDER BY
                       5 DESC ;;
   }
@@ -55,6 +57,11 @@ view: pdt_medianasr {
   dimension: electrode_footprint {
     type: number
     sql: ${TABLE}.electrode_footprint ;;
+  }
+
+  dimension: step {
+    type: number
+    sql: ${TABLE}.step ;;
   }
 
   dimension: step_table_sample_time {

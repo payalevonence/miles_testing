@@ -51,6 +51,8 @@ view: pre_build_pouch {
     type: number
     sql: ${TABLE}.number_of_layers ;;
   }
+
+
   dimension: pouch_dimensions {
     type: string
     sql: ${TABLE}.pouch_dimensions ;;
@@ -71,4 +73,9 @@ view: pre_build_pouch {
     type: count
     drill_fields: [pre_build_pouch_id]
   }
+
+  #measure: pouch_area {
+  #  type: number
+  #  sql: ${pre_build_pouch.number_of_layers} * ${electrode_mfg_pouch.electrode_footprint} ;;
+  #}
 }
