@@ -41,6 +41,12 @@ view: electrical_step_pouch {
     type: number
     sql: ${TABLE}.Time ;;
   }
+
+  dimension: delta_time_ {
+    type: number
+    sql: ${TABLE}.Time/3600 ;;
+  }
+
   measure: count {
     type: count
   }
