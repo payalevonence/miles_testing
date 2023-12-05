@@ -47,6 +47,11 @@ view: electrical_step_pouch {
     sql: ${TABLE}.Time/3600 ;;
   }
 
+  measure: cycle_pouch {
+    type: number
+    sql: ${cycle} * 1 ;;
+  }
+
   measure: count {
     type: count
   }
