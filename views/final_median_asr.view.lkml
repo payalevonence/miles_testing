@@ -14,8 +14,8 @@ view: final_median_asr {
           electrical_step_pouch.Cycle,
           electrical_step_pouch.StartV,
           electrical_step_pouch.Capacity / electrical_step_pouch.Time as stepcurrent
-      FROM `natrion-operational-data.operation_data.pre_build_pouch`  AS pre_build_pouch
-      INNER JOIN `natrion-operational-data.operation_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id
+      FROM `natrion-operational-data.operational_data.pre_build_pouch`  AS pre_build_pouch
+      INNER JOIN `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id
       INNER JOIN `natrion-operational-data.data.electrical_step_pouch` AS electrical_step_pouch ON
       pre_build_pouch.cell_id = electrical_step_pouch.Cell_id
       GROUP BY
@@ -44,6 +44,7 @@ view: final_median_asr {
     type: number
     sql: ${cycle} * 1 ;;
   }
+
 
   dimension: pre_build_pouch_number_of_layers {
     type: number
