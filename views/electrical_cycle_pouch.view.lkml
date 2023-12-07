@@ -11,6 +11,8 @@ view: electrical_cycle_pouch {
   }
   dimension: ce {
     type: number
+    label: "CE (%)"
+    value_format_name: decimal_2
     sql: ${TABLE}.CE ;;
   }
   dimension: cell_id {
@@ -27,6 +29,8 @@ view: electrical_cycle_pouch {
   }
   dimension: energy_d {
     type: number
+    label: "Energy(mWh)"
+    value_format_name: decimal_2
     sql: ${TABLE}.EnergyD ;;
   }
   dimension: first_step {
@@ -45,12 +49,20 @@ view: electrical_cycle_pouch {
     type: number
     sql: ${TABLE}.MedianDischargeV ;;
   }
+
+  #dimension: polarization {
+  #  type: number
+  #  sql: ${TABLE} ;;
+  #}
+
   dimension: num_steps {
     type: number
     sql: ${TABLE}.NumSteps ;;
   }
   dimension: percent_ccc_capacity {
     type: number
+    label: "% Constant Current Capacity"
+    value_format_name: decimal_4
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 

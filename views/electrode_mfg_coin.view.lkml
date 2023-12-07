@@ -1,9 +1,17 @@
 view: electrode_mfg_coin {
   sql_table_name: `natrion-operational-data.operational_data.electrode_mfg_coin` ;;
 
+  dimension: cam_loading {
+    type: number
+    sql: ${TABLE}.cam_loading ;;
+  }
+  dimension: cam_percent {
+    type: number
+    sql: ${TABLE}.cam_percent ;;
+  }
   dimension: cast_id {
     type: string
-    primary_key: yes
+    # hidden: yes
     sql: ${TABLE}.cast_id ;;
   }
   dimension: component {
@@ -32,24 +40,11 @@ view: electrode_mfg_coin {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
-
-  #measure: total_mass {
-  #  type: number
-  #  sql: ${casts.actual_mass_loading} * ${electrode_mfg_coin.electrode_footprint} ;;
-  #}
-
-
-
-
-
-
   measure: count {
     type: count
+    drill_fields: [casts.cast_id, users.firstname, users.user_id, users.middlename, users.lastname]
   }
-
-
-
-
 }

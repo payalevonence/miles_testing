@@ -35,18 +35,14 @@ view: electrolyte_mfg {
   }
   dimension: cots_electrolyte_id_ {
     type: string
-    sql: ${TABLE}.cots_electrolyte_id_ ;;
+    sql: ${TABLE}.`cots_electrolyte_id ` ;;
   }
-  dimension_group: date_mixed {
-    type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    datatype: datetime
+  dimension: date_mixed {
+    type: string
     sql: ${TABLE}.date_mixed ;;
   }
-  dimension_group: date_opened {
-    type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    datatype: datetime
+  dimension: date_opened {
+    type: string
     sql: ${TABLE}.date_opened ;;
   }
   dimension: description {
@@ -63,6 +59,7 @@ view: electrolyte_mfg {
   }
   dimension: recipe_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.recipe_id ;;
   }
   dimension: salts_id {
@@ -75,9 +72,11 @@ view: electrolyte_mfg {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
+    drill_fields: [recipes.recipe_id, users.firstname, users.user_id, users.middlename, users.lastname]
   }
 }

@@ -10,6 +10,10 @@ view: electrode_mfg_pouch {
     type: string
     sql: ${TABLE}.component ;;
   }
+  dimension: defects {
+    type: number
+    sql: ${TABLE}.defects ;;
+  }
   dimension: description {
     type: string
     sql: ${TABLE}.description ;;
@@ -31,7 +35,7 @@ view: electrode_mfg_pouch {
     sql: ${TABLE}.electrode_mass ;;
   }
   dimension: electrode_thickness {
-    type: number
+    type: string
     sql: ${TABLE}.electrode_thickness ;;
   }
   dimension: index {
@@ -72,23 +76,11 @@ view: electrode_mfg_pouch {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
-
-  #measure: multiplied_values {
-  #  type: number
-  #  sql: ${electrode_mfg_pouch.electrode_footprint} * ${pre_build_pouch.number_of_layers} ;;
-  #}
-
-
-
-
-
-
   measure: count {
     type: count
-    drill_fields: [casts.cast_id]
+    drill_fields: [casts.cast_id, users.firstname, users.user_id, users.middlename, users.lastname]
   }
-
-
 }

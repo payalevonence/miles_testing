@@ -17,10 +17,25 @@ view: sop {
   }
   dimension: user_id {
     type: number
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [sop_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	sop_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	lisic_separators.count,
+	lisic_slurries.count
+	]
+  }
+
 }

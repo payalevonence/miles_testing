@@ -7,12 +7,20 @@ view: stock_solutions {
     type: string
     sql: ${TABLE}.stock_solution_id ;;
   }
+  dimension: cup_size {
+    type: string
+    sql: ${TABLE}.cup_size ;;
+  }
   dimension: description {
     type: string
     sql: ${TABLE}.description ;;
   }
+  dimension: mins_mixed {
+    type: number
+    sql: ${TABLE}.mins_mixed ;;
+  }
   dimension: mix_time {
-    type: string
+    type: number
     sql: ${TABLE}.mix_time ;;
   }
   dimension: polymer_id {
@@ -33,7 +41,7 @@ view: stock_solutions {
     sql: ${TABLE}.salt_id ;;
   }
   dimension: salt_mass {
-    type: number
+    type: string
     sql: ${TABLE}.salt_mass ;;
   }
   dimension: solvent_id {
@@ -46,10 +54,25 @@ view: stock_solutions {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [stock_solution_id, recipes.recipe_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	stock_solution_id,
+	recipes.recipe_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	slurries.count
+	]
+  }
+
 }

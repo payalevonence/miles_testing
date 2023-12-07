@@ -12,7 +12,7 @@ view: pre_build_pouch {
     sql: ${TABLE}.anode_id ;;
   }
   dimension: bagging {
-    type: number
+    type: yesno
     sql: ${TABLE}.bagging ;;
   }
   dimension: blister_size {
@@ -45,14 +45,13 @@ view: pre_build_pouch {
   }
   dimension: experiment_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
   }
   dimension: number_of_layers {
     type: number
     sql: ${TABLE}.number_of_layers ;;
   }
-
-
   dimension: pouch_dimensions {
     type: string
     sql: ${TABLE}.pouch_dimensions ;;
@@ -61,21 +60,34 @@ view: pre_build_pouch {
     type: string
     sql: ${TABLE}.seperator_id ;;
   }
+  dimension: target_elyte_volume {
+    type: number
+    sql: ${TABLE}.target_elyte_volume ;;
+  }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   dimension: wrapped {
-    type: number
+    type: yesno
     sql: ${TABLE}.wrapped ;;
   }
   measure: count {
     type: count
-    drill_fields: [pre_build_pouch_id]
+    drill_fields: [detail*]
   }
 
-  #measure: pouch_area {
-  #  type: number
-  #  sql: ${pre_build_pouch.number_of_layers} * ${electrode_mfg_pouch.electrode_footprint} ;;
-  #}
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	pre_build_pouch_id,
+	experiments.experiment_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname
+	]
+  }
+
 }

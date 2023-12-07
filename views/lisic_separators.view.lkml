@@ -9,14 +9,16 @@ view: lisic_separators {
     type: string
     sql: ${TABLE}.cast_method ;;
   }
+  dimension: cast_temp {
+    type: number
+    sql: ${TABLE}.`cast temp` ;;
+  }
   dimension: cots {
-    type: yesno
+    type: number
     sql: ${TABLE}.cots ;;
   }
-  dimension_group: date_created {
-    type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    datatype: datetime
+  dimension: date_created {
+    type: string
     sql: ${TABLE}.date_created ;;
   }
   dimension: description {
@@ -25,6 +27,7 @@ view: lisic_separators {
   }
   dimension: experiment_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
   }
   dimension: final_temp {
@@ -53,6 +56,7 @@ view: lisic_separators {
   }
   dimension: recipe_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.recipe_id ;;
   }
   dimension: seperator_supplier {
@@ -65,6 +69,7 @@ view: lisic_separators {
   }
   dimension: sop_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.sop_id ;;
   }
   dimension: supply_id {
@@ -75,19 +80,27 @@ view: lisic_separators {
     type: number
     sql: ${TABLE}.time_to_vaccum ;;
   }
-  dimension: unnamed_19 {
-    type: number
-    sql: ${TABLE}.`unnamed:_19` ;;
-  }
-  dimension: unnamed_20 {
-    type: string
-    sql: ${TABLE}.`unnamed:_20` ;;
-  }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	experiments.experiment_id,
+	sop.sop_id,
+	recipes.recipe_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname
+	]
+  }
+
 }

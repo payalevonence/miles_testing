@@ -17,10 +17,24 @@ view: campaigns {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [campaign_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	campaign_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	experiments.count
+	]
+  }
+
 }

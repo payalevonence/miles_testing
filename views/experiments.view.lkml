@@ -9,6 +9,7 @@ view: experiments {
   }
   dimension: campaign_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.campaign_id ;;
   }
   dimension: description {
@@ -16,7 +17,7 @@ view: experiments {
     sql: ${TABLE}.description ;;
   }
   dimension: parent_id {
-    type: number
+    type: string
     sql: ${TABLE}.parent_id ;;
   }
   dimension: status {
@@ -25,10 +26,30 @@ view: experiments {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [experiment_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	experiment_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	campaigns.campaign_id,
+	cell_build.count,
+	casts.count,
+	lisic_separators.count,
+	lisic_slurries.count,
+	pre_build_pouch.count,
+	slurries.count
+	]
+  }
+
 }

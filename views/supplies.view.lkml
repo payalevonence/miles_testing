@@ -16,7 +16,7 @@ view: supplies {
     sql: ${TABLE}.active_material_id ;;
   }
   dimension: availability {
-    type: string
+    type: number
     sql: ${TABLE}.availability ;;
   }
   dimension: date_opened {
@@ -41,6 +41,7 @@ view: supplies {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   dimension: vendor {
@@ -49,6 +50,6 @@ view: supplies {
   }
   measure: count {
     type: count
-    drill_fields: [supply_id]
+    drill_fields: [supply_id, users.firstname, users.user_id, users.middlename, users.lastname]
   }
 }

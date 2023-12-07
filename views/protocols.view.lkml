@@ -25,18 +25,32 @@ view: protocols {
   }
   dimension: rc_sr_max_v {
     type: number
-    sql: ${TABLE}.rc_sr_max_v ;;
+    sql: ${TABLE}.rc_sr_max_V ;;
   }
   dimension: rc_sr_min_v {
     type: number
-    sql: ${TABLE}.rc_sr_min_v ;;
+    sql: ${TABLE}.rc_sr_min_V ;;
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [protocol_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	protocol_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	cell_test.count
+	]
+  }
+
 }

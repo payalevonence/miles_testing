@@ -25,6 +25,34 @@ view: users {
   }
   measure: count {
     type: count
-    drill_fields: [user_id, firstname, middlename, lastname]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	user_id,
+	firstname,
+	middlename,
+	lastname,
+	electrode_mfg_coin.count,
+	electrode_mfg_pouch.count,
+	campaigns.count,
+	cell_build.count,
+	electrolyte_mfg.count,
+	cell_test.count,
+	casts.count,
+	lisic_separators.count,
+	experiments.count,
+	lisic_slurries.count,
+	protocols.count,
+	recipes.count,
+	pre_build_pouch.count,
+	slurries.count,
+	sop.count,
+	stock_solutions.count,
+	supplies.count
+	]
+  }
+
 }

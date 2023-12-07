@@ -7,14 +7,6 @@ view: casts {
     type: string
     sql: ${TABLE}.cast_id ;;
   }
-  dimension: _of_passes {
-    type: number
-    sql: ${TABLE}.`#_of_passes` ;;
-  }
-  dimension: _of_thickness_reductions {
-    type: number
-    sql: ${TABLE}.`#_of_thickness_reductions` ;;
-  }
   dimension: actual_mass_loading {
     type: number
     sql: ${TABLE}.actual_mass_loading ;;
@@ -47,18 +39,20 @@ view: casts {
     type: number
     sql: ${TABLE}.carbon_coated ;;
   }
-  dimension_group: cast {
-    type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    datatype: datetime
+  dimension: cast_date {
+    type: string
     sql: ${TABLE}.cast_date ;;
+  }
+  dimension: cast_speed {
+    type: number
+    sql: ${TABLE}.cast_speed ;;
   }
   dimension: cast_thickness {
     type: number
     sql: ${TABLE}.cast_thickness ;;
   }
   dimension: cots {
-    type: yesno
+    type: number
     sql: ${TABLE}.cots ;;
   }
   dimension: current_collector_id {
@@ -77,17 +71,30 @@ view: casts {
     type: number
     sql: ${TABLE}.double_sided ;;
   }
-  dimension: ending_gap_height {
+  dimension: end_gap_heigh {
     type: number
-    sql: ${TABLE}.ending_gap_height ;;
+    sql: ${TABLE}.end_gap_heigh ;;
   }
   dimension: experiment_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
+  }
+  dimension: lisic_slurry_id {
+    type: string
+    sql: ${TABLE}.lisic_slurry_id ;;
   }
   dimension: location {
     type: string
     sql: ${TABLE}.location ;;
+  }
+  dimension: num_passes {
+    type: number
+    sql: ${TABLE}.num_passes ;;
+  }
+  dimension: num_thickness_reductions {
+    type: number
+    sql: ${TABLE}.num_thickness_reductions ;;
   }
   dimension: porosity_postcalendar {
     type: number
@@ -99,6 +106,7 @@ view: casts {
   }
   dimension: recipe_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.recipe_id ;;
   }
   dimension: slurry_id {
@@ -113,20 +121,49 @@ view: casts {
     type: string
     sql: ${TABLE}.supply_id ;;
   }
+  dimension: t1 {
+    type: number
+    sql: ${TABLE}.t1 ;;
+  }
+  dimension: t2 {
+    type: number
+    sql: ${TABLE}.t2 ;;
+  }
+  dimension: t3 {
+    type: number
+    sql: ${TABLE}.t3 ;;
+  }
   dimension: thickness_postcalendar {
     type: number
     sql: ${TABLE}.thickness_postcalendar ;;
   }
-  dimension: thickness_precalendar {
+  dimension: thickness_precalendar_avg {
     type: number
-    sql: ${TABLE}.thickness_precalendar ;;
+    sql: ${TABLE}.thickness_precalendar_avg ;;
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [cast_id, electrode_mfg_coin.count, electrode_mfg_pouch.count]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	cast_id,
+	experiments.experiment_id,
+	recipes.recipe_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	electrode_mfg_coin.count,
+	electrode_mfg_pouch.count
+	]
+  }
+
 }

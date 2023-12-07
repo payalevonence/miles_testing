@@ -42,9 +42,12 @@ view: electrical_step_pouch {
     sql: ${TABLE}.Time ;;
   }
 
+
   dimension: delta_time_ {
     type: number
-    sql: ${TABLE}.Time/3600 ;;
+    label: "delta Time(minutes)"
+    value_format_name: decimal_2
+    sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
   measure: cycle_pouch {

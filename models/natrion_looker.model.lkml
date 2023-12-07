@@ -105,6 +105,12 @@ explore: electrical_cycle_pouch {
     sql_on: ${electrical_cycle_pouch.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
     relationship: many_to_one
   }
+
+  join: cell_test {
+    type: inner
+    sql_on: ${electrical_cycle_pouch.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: electrical_step_pouch {
@@ -202,7 +208,7 @@ explore: cell_build {
 
   join: lisic_separators {
     type: inner
-    sql_on: ${cell_build.electolyte_id_} = ${lisic_separators.membrane_id} ;;
+    sql_on: ${cell_build.electolyte_id} = ${lisic_separators.membrane_id} ;;
     relationship: many_to_one
   }
 
@@ -682,5 +688,7 @@ explore:: trialpouch1 {}
 explore: median_asr_coin {}
 
 explore: pdt_medianasr {}
+
+explore: final_median_asr {}
 
 explore: trial_median_asr {}

@@ -15,7 +15,6 @@ view: cell_build {
   }
   dimension: cell_id {
     type: string
-    primary_key: yes
     sql: ${TABLE}.cell_id ;;
   }
   dimension: cell_type {
@@ -30,9 +29,9 @@ view: cell_build {
     type: number
     sql: ${TABLE}.dry_mass ;;
   }
-  dimension: electolyte_id_ {
+  dimension: electolyte_id {
     type: string
-    sql: ${TABLE}.electolyte_id_ ;;
+    sql: ${TABLE}.electolyte_id ;;
   }
   dimension: excess_casing_mass {
     type: number
@@ -40,7 +39,12 @@ view: cell_build {
   }
   dimension: experiment_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
+  }
+  dimension: lisic_gp_side {
+    type: string
+    sql: ${TABLE}.lisic_gp_side ;;
   }
   dimension: pouch {
     type: yesno
@@ -56,6 +60,7 @@ view: cell_build {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   dimension: wet_mass {
@@ -64,5 +69,6 @@ view: cell_build {
   }
   measure: count {
     type: count
+    drill_fields: [experiments.experiment_id, users.firstname, users.user_id, users.middlename, users.lastname]
   }
 }

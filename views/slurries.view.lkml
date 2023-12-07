@@ -35,10 +35,12 @@ view: slurries {
     type: number
     sql: ${TABLE}.conductive_material_mass ;;
   }
-  dimension_group: date_mixed {
-    type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
-    datatype: datetime
+  dimension: cup_size {
+    type: string
+    sql: ${TABLE}.cup_size ;;
+  }
+  dimension: date_mixed {
+    type: string
     sql: ${TABLE}.date_mixed ;;
   }
   dimension: description {
@@ -55,18 +57,20 @@ view: slurries {
   }
   dimension: experiment_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
   }
-  dimension: lino3_id {
-    type: number
-    sql: ${TABLE}.lino3_id ;;
+  dimension: li_no3_id {
+    type: string
+    sql: ${TABLE}.LiNO3_id ;;
   }
-  dimension: lino3_mass {
+  dimension: li_no3_mass {
     type: number
-    sql: ${TABLE}.lino3_mass ;;
+    sql: ${TABLE}.LiNO3_mass ;;
   }
   dimension: recipe_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.recipe_id ;;
   }
   dimension: solvent_id {
@@ -79,6 +83,7 @@ view: slurries {
   }
   dimension: stock_solution_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.stock_solution_id ;;
   }
   dimension: stock_solution_mass {
@@ -87,14 +92,30 @@ view: slurries {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   dimension: viscosity {
-    type: string
+    type: number
     sql: ${TABLE}.viscosity ;;
   }
   measure: count {
     type: count
-    drill_fields: [slurry_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	slurry_id,
+	experiments.experiment_id,
+	recipes.recipe_id,
+	stock_solutions.stock_solution_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname
+	]
+  }
+
 }

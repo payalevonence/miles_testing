@@ -8,7 +8,7 @@ view: lisic_slurries {
     sql: ${TABLE}.lisic_slurry_id ;;
   }
   dimension: additives_id {
-    type: number
+    type: string
     sql: ${TABLE}.additives_id ;;
   }
   dimension: additives_mass {
@@ -37,6 +37,7 @@ view: lisic_slurries {
   }
   dimension: experiment_id {
     type: number
+    # hidden: yes
     sql: ${TABLE}.experiment_id ;;
   }
   dimension: flame_retardant_id {
@@ -44,7 +45,7 @@ view: lisic_slurries {
     sql: ${TABLE}.flame_retardant_id ;;
   }
   dimension: flame_retardant_mass {
-    type: string
+    type: number
     sql: ${TABLE}.flame_retardant_mass ;;
   }
   dimension: mix_method {
@@ -106,6 +107,7 @@ view: lisic_slurries {
   }
   dimension: sop_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.sop_id ;;
   }
   dimension: total_composition {
@@ -114,10 +116,26 @@ view: lisic_slurries {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [lisic_slurry_id, recipes.recipe_id]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	lisic_slurry_id,
+	experiments.experiment_id,
+	sop.sop_id,
+	recipes.recipe_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname
+	]
+  }
+
 }

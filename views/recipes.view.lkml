@@ -21,10 +21,29 @@ view: recipes {
   }
   dimension: user_id {
     type: string
+    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [recipe_id, stock_solutions.count, lisic_slurries.count, lisic_separators.count]
+    drill_fields: [detail*]
   }
+
+  # ----- Sets of fields for drilling ------
+  set: detail {
+    fields: [
+	recipe_id,
+	users.firstname,
+	users.user_id,
+	users.middlename,
+	users.lastname,
+	electrolyte_mfg.count,
+	casts.count,
+	lisic_separators.count,
+	lisic_slurries.count,
+	slurries.count,
+	stock_solutions.count
+	]
+  }
+
 }
