@@ -688,6 +688,6 @@ explore:: trialpouch1 {}
 explore: median_asr_coin {}
 
 explore: pdt_medianasr {}
-
+explore: final_capacity {}
 explore: final_median_asr {}
 explore: trial_median_asr {}

@@ -2,22 +2,22 @@
 view: Trial3 {
   derived_table: {
     sql: SELECT
-          electrode_mfg_coin.electrode_footprint as electrode_footprint,
+          electrode_mfg_pouch.electrode_footprint as electrode_footprint,
           casts.actual_mass_loading AS actual_mass_loading,
-          electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading AS total_mass,
-          Cycle_Table_Sample.Cell_id AS Cell_id,
-          Cycle_Table_Sample.CapacityC AS CapacityC,
-          Cycle_Table_Sample.CapacityD AS CapacityD,
-          Cycle_Table_Sample.CapacityC *1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) as capc,
-          Cycle_Table_Sample.CapacityD *1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) as capd,
-          Cycle_Table_Sample.Cycle AS Cycle,
+          electrode_mfg_pouch.electrode_footprint * casts.actual_mass_loading AS total_mass,
+          electrical_cycle_pouch.Cell_id AS Cell_id,
+          electrical_cycle_pouch.CapacityC AS CapacityC,
+          electrical_cycle_pouch.CapacityD AS CapacityD,
+          electrical_cycle_pouch.CapacityC *1000 / (electrode_mfg_pouch.electrode_footprint * casts.actual_mass_loading) as capc,
+          electrical_cycle_pouch.CapacityD *1000 / (electrode_mfg_pouch.electrode_footprint * casts.actual_mass_loading) as capd,
+          electrical_cycle_pouch.Cycle AS Cycle,
           cell_build.cell_id  AS cell_build_cell_id,
           cell_test.test_date as test_date,
           cell_test.protocol_id as protocol_id
-      FROM `natrion-operational-data.operational_data.electrode_mfg_coin`  AS electrode_mfg_coin
-      INNER JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_coin.cast_id = casts.cast_id
-      INNER JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON electrode_mfg_coin.electrode_id = cell_build.cathode_id
-      INNER JOIN `natrion-operational-data.Data.Cycle_Table_Sample` AS Cycle_Table_Sample ON cell_build.cell_id = Cycle_Table_Sample.Cell_id
+      FROM `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch
+      INNER JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_pouch.cast_id = casts.cast_id
+      INNER JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON electrode_mfg_pouch.electrode_id = cell_build.cathode_id
+      INNER JOIN `natrion-operational-data.data.electrical_cycle_pouch` AS electrical_cycle_pouch ON cell_build.cell_id = electrical_cycle_pouch.Cell_id
       INNER JOIN `natrion-operational-data.operational_data.cell_test` AS cell_test ON cell_build.cell_id = cell_test.Cell_id
       GROUP BY
           1,
@@ -46,6 +46,7 @@ view: Trial3 {
     type: number
     sql: ${cycle} * 1 ;;
   }
+
 
   measure: CapacityC11 {
     type: number

@@ -1,5 +1,5 @@
 view: electrical_step_coin {
-  sql_table_name: `natrion-operational-data.Data.electrical_step_coin` ;;
+  sql_table_name: `natrion-operational-data.data.electrical_step_coin` ;;
 
   dimension: capacity {
     type: number
@@ -7,11 +7,15 @@ view: electrical_step_coin {
   }
   dimension: cell_id {
     type: string
-    sql: ${TABLE}.Cell_id ;;
+    sql: ${TABLE}.Cell_Id ;;
+  }
+  dimension: cycle {
+    type: number
+    sql: ${TABLE}.Cycle ;;
   }
   dimension: end_v {
     type: number
-    sql: ${TABLE}.End_V ;;
+    sql: ${TABLE}.EndV ;;
   }
   dimension: energy {
     type: number
@@ -19,7 +23,7 @@ view: electrical_step_coin {
   }
   dimension: median_v {
     type: number
-    sql: ${TABLE}.Median_V ;;
+    sql: ${TABLE}.MedianV ;;
   }
   dimension: mode {
     type: number
@@ -27,7 +31,7 @@ view: electrical_step_coin {
   }
   dimension: start_v {
     type: number
-    sql: ${TABLE}.Start_V ;;
+    sql: ${TABLE}.StartV ;;
   }
   dimension: step {
     type: number
