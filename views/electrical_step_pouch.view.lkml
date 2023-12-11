@@ -46,9 +46,18 @@ view: electrical_step_pouch {
   dimension: delta_time_ {
     type: number
     label: "delta Time(minutes)"
-    value_format_name: decimal_2
+    value_format_name: decimal_0
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
+
+  measure: delta_time1_ {
+    type: number
+    label: "delta Time(minutes)"
+    value_format_name: decimal_0
+    sql: ${TABLE}.Time/3600 * 60 ;;
+  }
+
+
 
   measure: cycle_pouch {
     type: number

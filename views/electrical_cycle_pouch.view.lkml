@@ -66,6 +66,77 @@ view: electrical_cycle_pouch {
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 
+  dimension: Voltage_Hysteresis1 {
+    type: number
+    label: "Voltage_Hysteresis(mV)"
+    sql: abs(${electrical_cycle_pouch.median_discharge_v} - ${electrical_cycle_pouch.median_charge_v}) * 1000 ;;
+  }
+
+
+  measure: energy_d1 {
+    type: number
+    label: "Energy(mWh)"
+    value_format_name: decimal_2
+    sql: ${TABLE}.EnergyD ;;
+  }
+
+  measure: ce1 {
+    type: number
+    label: "CE (%)"
+    value_format_name: decimal_0
+    sql: ${TABLE}.CE ;;
+  }
+
+
+
+  measure: asrch_unfiltered {
+    type: number
+    label: "ASR_charge"
+    sql: ${electrical_cycle_pouch.median_charge_v} + (${electrical_cycle_pouch.cycle_pouch} * 0) ;;
+  }
+
+  filter: asrch_filter {
+    sql: electrical_step_pouch.mode = "118"
+      }
+
+      measure: asrch {
+      type: number
+      filters: [asrch_filter]
+      sql: asrch_unfiltered ;;
+  }
+
+  measure: asrdis_unfiltered {
+    type: number
+    label: "ASR_discharge"
+    sql: ${electrical_cycle_pouch.median_discharge_v} + (${electrical_cycle_pouch.cycle_pouch} * 0) ;;
+  }
+
+  filter: asrdis_filter {
+    sql: electrical_step_pouch.mode = "117"
+      }
+
+      measure: asrch {
+      type: number
+      filters: [asrdis_filter]
+      sql: asrdis_unfiltered ;;
+  }
+
+
+  measure: Voltage_Hysteresis {
+    type: number
+    label: "Voltage_Hysteresis(mV)"
+    sql: abs(${electrical_cycle_pouch.median_discharge_v} - ${electrical_cycle_pouch.median_charge_v}) * 1000 ;;
+  }
+
+
+
+
+
+  measure: asrdis {
+    type: number
+    sql: ${electrical_cycle_pouch.median_discharge_v} + (${electrical_cycle_pouch.cycle_pouch} * 0) ;;
+  }
+
   measure: cycle_pouch {
     type: number
     sql: ${cycle} * 1 ;;
