@@ -73,6 +73,12 @@ view: pre_build_pouch {
     type: yesno
     sql: ${TABLE}.wrapped ;;
   }
+
+  dimension: area_eis {
+    type: number
+    sql: electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -81,13 +87,13 @@ view: pre_build_pouch {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	pre_build_pouch_id,
-	experiments.experiment_id,
-	users.firstname,
-	users.user_id,
-	users.middlename,
-	users.lastname
-	]
+  pre_build_pouch_id,
+  experiments.experiment_id,
+  users.firstname,
+  users.user_id,
+  users.middlename,
+  users.lastname
+  ]
   }
 
 }

@@ -49,6 +49,13 @@ view: electrical_step_coin {
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
+  measure: delta_time1_ {
+    type: number
+    label: "delta Time(minutes)"
+    value_format_name: decimal_2
+    sql: ${TABLE}.Time/3600 * 60 ;;
+  }
+
   measure: cycle_pouch {
     type: number
     sql: ${cycle} * 1 ;;

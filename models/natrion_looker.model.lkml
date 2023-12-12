@@ -331,6 +331,12 @@ explore: pre_build_pouch {
     relationship: many_to_one
   }
 
+  join: eis_pouch {
+    type: inner
+    sql_on: ${pre_build_pouch.cell_id} = ${eis_pouch.cell_id} ;;
+    relationship: many_to_one
+  }
+
 }
 
 explore: cell_test {
@@ -691,3 +697,5 @@ explore: pdt_medianasr {}
 explore: final_capacity {}
 explore: final_median_asr {}
 explore: trial_median_asr {}
+explore: specific_eis_pouch {}
+explore: final_capacity_coin {}

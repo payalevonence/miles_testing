@@ -11,6 +11,8 @@ view: electrical_cycle_coin {
   }
   dimension: ce {
     type: number
+    label: "CE (%)"
+    value_format_name: decimal_2
     sql: ${TABLE}.CE ;;
   }
   dimension: cell_id {
@@ -27,6 +29,8 @@ view: electrical_cycle_coin {
   }
   dimension: energy_d {
     type: number
+    label: "Energy(mWh)"
+    value_format_name: decimal_2
     sql: ${TABLE}.EnergyD ;;
   }
   dimension: first_step {
@@ -53,6 +57,21 @@ view: electrical_cycle_coin {
     type: number
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
+
+  measure: energy_d1 {
+    type: number
+    label: "Energy(mWh)"
+    value_format_name: decimal_2
+    sql: ${TABLE}.EnergyD ;;
+  }
+
+  measure: ce1 {
+    type: number
+    label: "CE (%)"
+    value_format_name: decimal_0
+    sql: ${TABLE}.CE ;;
+  }
+
   measure: count {
     type: count
   }

@@ -21,6 +21,22 @@ view: eis_pouch {
     type: number
     sql: ${TABLE}.Zre ;;
   }
+
+  dimension: specific_zim {
+    type: number
+    sql: electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * ${TABLE}.Zim ;;
+  }
+
+  dimension: specific_zre {
+    type: number
+    sql: electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * ${TABLE}.Zre ;;
+  }
+
+  measure: specific_zre1 {
+    type: number
+    sql: electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * ${TABLE}.Zre ;;
+  }
+
   measure: count {
     type: count
   }
