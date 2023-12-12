@@ -62,7 +62,7 @@ view: electrical_cycle_pouch {
   dimension: percent_ccc_capacity {
     type: number
     label: "% Constant Current Capacity"
-    value_format_name: decimal_4
+    value_format_name: decimal_0
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 
@@ -85,6 +85,13 @@ view: electrical_cycle_pouch {
     label: "CE (%)"
     value_format_name: decimal_0
     sql: ${TABLE}.CE ;;
+  }
+
+  measure: percent_ccc_capacity1 {
+    type: number
+    label: "% Constant Current Capacity"
+    value_format_name: decimal_0
+    sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 
 

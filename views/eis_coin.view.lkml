@@ -1,59 +1,27 @@
 view: eis_coin {
-  sql_table_name: `natrion-operational-data.Data.eis_coin` ;;
+  sql_table_name: `natrion-operational-data.data_test.eis_coin` ;;
 
   dimension: cell_id {
     type: string
-    sql: ${TABLE}.Cell_Id ;;
+    sql: ${TABLE}.cell_id ;;
   }
-  dimension: configuration_identifier {
-    type: string
-    sql: ${TABLE}.Configuration_Identifier ;;
-  }
-  dimension_group: date_mapping {
-    type: time
-    timeframes: [raw, date, week, month, quarter, year]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.Date_Mapping ;;
-  }
-  dimension: electrolyte_identifier {
-    type: string
-    sql: ${TABLE}.Electrolyte_Identifier ;;
-  }
-  dimension: filename {
-    type: string
-    sql: ${TABLE}.Filename ;;
-  }
-  dimension: frequency_hz {
+  dimension: frequency {
     type: number
-    sql: ${TABLE}.Frequency_Hz ;;
+    sql: ${TABLE}.Frequency ;;
   }
-  dimension: lisic_identifier {
+  dimension: soh {
     type: string
-    sql: ${TABLE}.LISIC_Identifier ;;
+    sql: ${TABLE}.soh ;;
   }
-  dimension: number {
+  dimension: zim {
     type: number
-    sql: ${TABLE}.Number ;;
+    sql: ${TABLE}.Zim ;;
   }
-  dimension: project_identifier {
-    type: string
-    sql: ${TABLE}.Project_Identifier ;;
-  }
-  dimension: specific_identifier {
-    type: string
-    sql: ${TABLE}.Specific_Identifier ;;
-  }
-  dimension: zim_ohms {
+  dimension: zre {
     type: number
-    sql: ${TABLE}.Zim_ohms ;;
-  }
-  dimension: zre_ohms {
-    type: number
-    sql: ${TABLE}.Zre_ohms ;;
+    sql: ${TABLE}.Zre ;;
   }
   measure: count {
     type: count
-    drill_fields: [filename]
   }
 }
