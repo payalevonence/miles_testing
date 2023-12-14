@@ -45,6 +45,24 @@ view: final_median_asr {
     sql: ${cycle} * 1 ;;
   }
 
+  measure: asrch_unfiltered {
+    type: average
+    label: "ASR_charge"
+    sql: ${final_median_asr.median_asr_charged} ;;
+  }
+
+  filter: asrch_filter {
+    sql: final_median_asr.mode = "118"
+      }
+
+      measure: asrch {
+      type: average
+      filters: [asrch_filter]
+      sql: asrch_unfiltered ;;
+  }
+
+
+
 
   dimension: pre_build_pouch_number_of_layers {
     type: number

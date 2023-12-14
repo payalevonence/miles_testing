@@ -693,7 +693,6 @@ explore: lisic_slurries {
 
 
 
-
 explore: median_asr_coin {}
 
 explore: pdt_medianasr {}
@@ -701,4 +700,4 @@ explore: specific {}
 explore: final_median_asr {}
 explore: trial_median_asr {}
 explore: specific_eis_pouch {}
-explore: final_capacity_coin {}
+explore: specific_coin {}

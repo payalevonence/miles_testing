@@ -97,9 +97,9 @@ view: electrical_cycle_pouch {
 
 
   measure: asrch_unfiltered {
-    type: number
+    type: average
     label: "ASR_charge"
-    sql: ${electrical_cycle_pouch.median_charge_v} + (${electrical_cycle_pouch.cycle_pouch} * 0) ;;
+    sql: ${electrical_cycle_pouch.median_charge_v} ;;
   }
 
   filter: asrch_filter {
@@ -107,22 +107,22 @@ view: electrical_cycle_pouch {
       }
 
       measure: asrch {
-      type: number
+      type: average
       filters: [asrch_filter]
       sql: asrch_unfiltered ;;
   }
 
   measure: asrdis_unfiltered {
-    type: number
+    type: average
     label: "ASR_discharge"
-    sql: ${electrical_cycle_pouch.median_discharge_v} + (${electrical_cycle_pouch.cycle_pouch} * 0) ;;
+    sql: ${electrical_cycle_pouch.median_discharge_v} ;;
   }
 
   filter: asrdis_filter {
     sql: electrical_step_pouch.mode = "117"
       }
 
-      measure: asrch {
+      measure: average {
       type: number
       filters: [asrdis_filter]
       sql: asrdis_unfiltered ;;
