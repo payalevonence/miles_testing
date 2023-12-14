@@ -35,12 +35,12 @@ view: specific_eis_pouch {
   }
 
   measure: eis_zim {
-    type: number
+    type: average
     sql: abs(${TABLE}.specific_zim) ;;
   }
 
   measure: eis_zre {
-    type: number
+    type: average
     sql: ${TABLE}.specific_zre * 1 ;;
   }
 
