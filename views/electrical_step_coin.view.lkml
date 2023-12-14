@@ -50,7 +50,7 @@ view: electrical_step_coin {
   }
 
   measure: delta_time1_ {
-    type: number
+    type: average
     label: "delta Time(minutes)"
     value_format_name: decimal_2
     sql: ${TABLE}.Time/3600 * 60 ;;

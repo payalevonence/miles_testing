@@ -58,15 +58,28 @@ view: electrical_cycle_coin {
     sql: ${TABLE}.PercentCCC_Capacity ;;
   }
 
+  measure: percent_ccc_capacity1 {
+    type: average
+    label: "% Constant Current Capacity"
+    value_format_name: decimal_0
+    sql: ${TABLE}.PercentCCC_Capacity ;;
+  }
+
+  measure: Voltage_Hysteresis {
+    type: average
+    label: "Voltage_Hysteresis(mV)"
+    sql: abs(${electrical_cycle_coin.median_discharge_v} - ${electrical_cycle_coin.median_charge_v}) * 1000 ;;
+  }
+
   measure: energy_d1 {
-    type: number
+    type: average
     label: "Energy(mWh)"
     value_format_name: decimal_2
     sql: ${TABLE}.EnergyD ;;
   }
 
   measure: ce1 {
-    type: number
+    type: average
     label: "CE (%)"
     value_format_name: decimal_0
     sql: ${TABLE}.CE ;;

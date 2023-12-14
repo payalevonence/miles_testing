@@ -1,5 +1,5 @@
 
-view: final_capacity {
+view: specific {
   derived_table: {
     sql: SELECT
           casts.actual_mass_loading  AS actual_mass_loading,
@@ -34,8 +34,20 @@ view: final_capacity {
     drill_fields: [detail*]
   }
 
+  measure: specific_capacity_c1 {
+    type: average
+    label: "capacity_c"
+    sql: ${TABLE}.specific_capacityC ;;
+  }
+
+  measure: specific_capacity_d1 {
+    type: average
+    label: "capacity_d"
+    sql: ${TABLE}.specific_capacityD ;;
+  }
+
   measure: cycle1 {
-    type: number
+    type: average
     sql: ${cycle} * 1 ;;
   }
 

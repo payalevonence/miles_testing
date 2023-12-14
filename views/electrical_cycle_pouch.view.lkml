@@ -88,7 +88,7 @@ view: electrical_cycle_pouch {
   }
 
   measure: percent_ccc_capacity1 {
-    type: number
+    type: average
     label: "% Constant Current Capacity"
     value_format_name: decimal_0
     sql: ${TABLE}.PercentCCC_Capacity ;;

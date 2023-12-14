@@ -152,7 +152,14 @@ explore: eis_coin {
 
 explore: eis_pouch {}
 
-explore: electrical_cycle_coin {}
+explore: electrical_cycle_coin {
+  join: electrical_step_coin {
+    type: inner
+    sql_on: ${electrical_cycle_coin.cell_id} = ${electrical_step_coin.cell_id} ;;
+    relationship: many_to_one
+  }
+}
+
 
 
 
@@ -690,7 +697,7 @@ explore: lisic_slurries {
 explore: median_asr_coin {}
 
 explore: pdt_medianasr {}
-explore: final_capacity {}
+explore: specific {}
 explore: final_median_asr {}
 explore: trial_median_asr {}
 explore: specific_eis_pouch {}
