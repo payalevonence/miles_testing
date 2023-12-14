@@ -43,21 +43,39 @@ view: electrical_step_pouch {
   }
 
 
+
+  dimension: primary_key {
+    primary_key: yes
+    sql: CONCAT(${TABLE}.Cell_Id, ${TABLE}.Cycle) ;;
+  }
+
   dimension: delta_time_ {
     type: number
     label: "delta Time(minutes)"
-    value_format_name: decimal_0
+    value_format: "0.00"
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
-  measure: delta_time1_ {
+  dimension: derived_delta_time {
     type: number
+    value_format: "0.00"
+    sql: if(${TABLE}.delta_time_ = null, -1, ${TABLE}.delta_time_)
+    ;;
+  }
+
+  measure: delta_time1_ {
+    type: average
     label: "delta Time(minutes)"
     value_format_name: decimal_0
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
-
+measure: average_delta_time  {
+  type: average
+  value_format: "0.00"
+  label: "average_delta_time"
+  sql: ${TABLE}.Time/3600 * 60 ;;
+}
 
   measure: cycle_pouch {
     type: number

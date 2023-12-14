@@ -74,14 +74,14 @@ view: electrical_cycle_pouch {
 
 
   measure: energy_d1 {
-    type: number
+    type: average
     label: "Energy(mWh)"
     value_format_name: decimal_2
     sql: ${TABLE}.EnergyD ;;
   }
 
   measure: ce1 {
-    type: number
+    type: average
     label: "CE (%)"
     value_format_name: decimal_0
     sql: ${TABLE}.CE ;;
@@ -130,7 +130,7 @@ view: electrical_cycle_pouch {
 
 
   measure: Voltage_Hysteresis {
-    type: number
+    type: average
     label: "Voltage_Hysteresis(mV)"
     sql: abs(${electrical_cycle_pouch.median_discharge_v} - ${electrical_cycle_pouch.median_charge_v}) * 1000 ;;
   }

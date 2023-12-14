@@ -1,4 +1,4 @@
-connection: "natrion-cex-data"
+connection: "natrion_operational_data"
 
 # include all the views
 include: "/views/**/*.view.lkml"
@@ -681,15 +681,11 @@ explore: lisic_slurries {
   }
 }
 
-explore: trial1 {}
 
-explore: trial2 {}
 
-explore: Trial3 {}
 
-explore:trial_pouch {}
 
-explore:: trialpouch1 {}
+
 
 explore: median_asr_coin {}
 
