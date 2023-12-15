@@ -588,3 +588,5 @@ explore: final_median_asr {}
 explore: specific_eis_pouch {}
 explore: specific_coin {}
 explore: specific_eis_coin {}
+
+explore: median_asr {}
