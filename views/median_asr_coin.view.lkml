@@ -60,10 +60,6 @@ view: median_asr_coin {
     sql: ${TABLE}.cell_id ;;
   }
 
-  dimension: cell_id_1 {
-    type: string
-    sql: ${TABLE}.cell_id_1 ;;
-  }
 
   dimension: median_v {
     type: number
@@ -119,7 +115,6 @@ view: median_asr_coin {
     fields: [
         electrode_footprint,
   cell_id,
-  cell_id_1,
   median_v,
   mode,
   capacity,

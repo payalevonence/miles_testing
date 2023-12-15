@@ -595,11 +595,24 @@ explore: lisic_slurries {
 
 
 explore: median_asr_coin {}
-explore: specific {}
+
+explore: specific {
+  join: cell_test {
+    type: left_outer
+    sql: ${specific.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
 explore: final_median_asr {}
 explore: specific_eis_pouch {}
 explore: specific_coin {}
 explore: specific_eis_coin {}
 
 
-explore: median_asr {}
+explore: median_asr {
+  join: cell_test {
+    type: left_outer
+    sql_on: ${median_asr.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
