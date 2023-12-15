@@ -72,6 +72,12 @@ explore: electrical_cycle_coin {
     sql_on: ${electrical_cycle_coin.cell_id} = ${electrical_step_coin.cell_id} ;;
     relationship: many_to_one
   }
+
+  join: cell_test {
+    type: left_outer
+    sql_on: ${electrical_cycle_coin.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 
@@ -79,7 +85,7 @@ explore: electrical_step_coin {
   join: cell_test {
     type: inner
     sql_on: ${electrical_step_coin.cell_id} = ${cell_test.cell_id} ;;
-    relationship: many_to_many
+    relationship: many_to_one
   }
 }
 
