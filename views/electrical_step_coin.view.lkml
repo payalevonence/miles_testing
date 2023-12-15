@@ -49,6 +49,11 @@ view: electrical_step_coin {
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
+  dimension: primary_key {
+    primary_key: yes
+    sql: CONCAT(${TABLE}.Cell_Id, ${TABLE}.Cycle) ;;
+  }
+
   measure: delta_time1_ {
     type: average
     label: "delta Time(minutes)"

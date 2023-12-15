@@ -69,7 +69,13 @@ explore: electrical_cycle_coin {
 }
 
 
-explore: electrical_step_coin {}
+explore: electrical_step_coin {
+  join: cell_test {
+    type: inner
+    sql_on: ${electrical_step_coin.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_many
+  }
+}
 
 
 explore: electrode_mfg_coin {

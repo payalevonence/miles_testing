@@ -35,7 +35,6 @@ view: cell_test {
   }
   dimension: protocol_id {
     type: string
-    # hidden: yes
     sql: ${TABLE}.protocol_id ;;
   }
   dimension: test_date {
@@ -43,18 +42,23 @@ view: cell_test {
     sql: ${TABLE}.test_date ;;
   }
 
-  dimension_group: testdate {
+  dimension: test_date1 {
+    type: date_time
+    hidden: yes
+    sql: CAST(${TABLE}.test_date AS TIMESTAMP) ;;
+  }
+
+  dimension_group: created {
     type: time
     timeframes: [time, date, week, month, raw]
-    sql: ${TABLE}.test_date ;;
+    sql: CAST(${TABLE}.test_date AS TIMESTAMP) ;;
   }
+
   dimension: user_id {
     type: string
-    # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
   measure: count {
     type: count
-    drill_fields: [users.firstname, users.user_id, users.middlename, users.lastname, protocols.protocol_id]
   }
 }
