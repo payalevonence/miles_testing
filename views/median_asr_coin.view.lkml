@@ -2,35 +2,37 @@
 view: median_asr_coin {
   derived_table: {
     sql: SELECT
-          step_table_sample.MedianV  AS step_table_sample_median_v,
-          step_table_sample.Capacity  AS step_table_sample_capacity,
-          electrode_mfg_coin.electrode_footprint as electrode_footprint,
-          step_table_sample.Time  AS step_table_sample_time,
-          step_table_sample.Mode  AS step_table_sample_mode,
-          step_table_sample.Cell_id  AS step_table_sample_cell_id,
-          cell_test.test_date as test_date,
-          step_table_sample.Capacity / step_table_sample.Time as step_current,
-          step_table_sample.Step  AS step_table_sample_step,
-          step_table_sample.MedianV / (step_table_sample.Capacity / step_table_sample.Time) * electrode_mfg_coin.electrode_footprint as Median_ASR
-      FROM `Data.Step_Table_Sample`  AS step_table_sample
-      INNER JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON step_table_sample.cell_id = cell_build.cell_id
-      INNER JOIN `natrion-operational-data.operational_data.electrode_mfg_coin`  AS electrode_mfg_coin ON electrode_mfg_coin.electrode_id = cell_build.cathode_id
-      INNER JOIN `natrion-operational-data.operational_data.cell_test` AS cell_test ON cell_build.cell_id = cell_test.Cell_id
+                electrode_mfg_coin.electrode_footprint AS electrode_footprint,
+                electrical_step_coin.Cell_id AS cell_id,
+                electrical_step_coin.MedianV AS median_v,
+                electrical_step_coin.Mode AS mode,
+                electrical_step_coin.Capacity AS capacity,
+                electrical_step_coin.Time AS time,
+                electrical_step_coin.Cycle,
+                electrical_step_coin.StartV,
+                MedianV - StartV as chargeV,
+                electrical_step_coin.Capacity / electrical_step_coin.Time AS stepcurrent,
+                CASE
+                    WHEN electrical_step_coin.Mode = 118 THEN
+                        (((MedianV - StartV) / (electrical_step_coin.Capacity / electrical_step_coin.Time)) * (electrode_mfg_coin.electrode_footprint)) / 1000
+                    ELSE
+                        NULL
+                END AS charged,
+                CASE
+                    WHEN electrical_step_coin.Mode = 117 THEN
+                        (((StartV - MedianV) / (electrical_step_coin.Capacity / electrical_step_coin.Time)) * (electrode_mfg_coin.electrode_footprint)) / 1000
+                    ELSE
+                        NULL
+                END AS discharged
+            FROM
+                `natrion-operational-data.operational_data.cell_build` AS cell_build
+            INNER JOIN
+                `natrion-operational-data.operational_data.electrode_mfg_coin` AS electrode_mfg_coin ON cell_build.cathode_id = electrode_mfg_coin.electrode_id
 
-      GROUP BY
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-      ORDER BY
-          5 DESC
-      LIMIT 500 ;;
+            INNER JOIN
+                `natrion-operational-data.data.electrical_step_coin` AS electrical_step_coin ON cell_build.cell_id = electrical_step_coin.Cell_id
+                where (electrical_step_coin.Capacity not in(0.0)) and (electrical_step_coin.Time not in(0.0)) and (electrical_step_coin.Mode = 117 or electrical_step_coin.Mode = 118)
+                order by electrical_step_coin.Capacity, electrical_step_coin.Time  ;;
   }
 
   measure: count {
@@ -38,19 +40,14 @@ view: median_asr_coin {
     drill_fields: [detail*]
   }
 
-  measure: cycle1 {
-    type: number
-    sql: ${step} * 1 ;;
+  measure: charged {
+    type: average
+    sql: ${TABLE}.charged ;;
   }
 
-  dimension: step_table_sample_median_v {
-    type: number
-    sql: ${TABLE}.step_table_sample_median_v ;;
-  }
-
-  dimension: step_table_sample_capacity {
-    type: number
-    sql: ${TABLE}.step_table_sample_capacity ;;
+  measure: discharged {
+    type: average
+    sql: ${TABLE}.discharged ;;
   }
 
   dimension: electrode_footprint {
@@ -58,54 +55,81 @@ view: median_asr_coin {
     sql: ${TABLE}.electrode_footprint ;;
   }
 
-  dimension: step_table_sample_time {
-    type: number
-    sql: ${TABLE}.step_table_sample_time ;;
-  }
-
-  dimension: step_table_sample_mode {
-    type: number
-    sql: ${TABLE}.step_table_sample_mode ;;
-  }
-
-  dimension: step_table_sample_cell_id {
+  dimension: cell_id {
     type: string
-    sql: ${TABLE}.step_table_sample_cell_id ;;
+    sql: ${TABLE}.cell_id ;;
   }
 
-  dimension_group: test_date {
-    type: time
-    datatype: datetime
-    sql: ${TABLE}.test_date ;;
+  dimension: cell_id_1 {
+    type: string
+    sql: ${TABLE}.cell_id_1 ;;
   }
 
-  dimension: step {
+  dimension: median_v {
     type: number
-    label: "cycle"
-    sql: ${TABLE}.step ;;
+    sql: ${TABLE}.median_v ;;
   }
 
-  dimension: step_current {
+  dimension: mode {
     type: number
-    sql: ${TABLE}.step_current ;;
+    sql: ${TABLE}.mode ;;
   }
 
-  dimension: median_asr {
+  dimension: capacity {
     type: number
-    sql: ${TABLE}.Median_ASR ;;
+    sql: ${TABLE}.capacity ;;
+  }
+
+  dimension: time {
+    type: number
+    sql: ${TABLE}.time ;;
+  }
+
+  dimension: cycle {
+    type: number
+    sql: ${TABLE}.Cycle ;;
+  }
+
+  dimension: start_v {
+    type: number
+    sql: ${TABLE}.StartV ;;
+  }
+
+  dimension: charge_v {
+    type: number
+    sql: ${TABLE}.chargeV ;;
+  }
+
+  dimension: stepcurrent {
+    type: number
+    sql: ${TABLE}.stepcurrent ;;
+  }
+
+  dimension: charged1 {
+    type: number
+    sql: ${TABLE}.charged ;;
+  }
+
+  dimension: discharged1 {
+    type: number
+    sql: ${TABLE}.discharged ;;
   }
 
   set: detail {
     fields: [
-        step_table_sample_median_v,
-  step_table_sample_capacity,
-  electrode_footprint,
-  step_table_sample_time,
-  step_table_sample_mode,
-  step_table_sample_cell_id,
-  test_date_time,
-  step_current,
-  median_asr
+        electrode_footprint,
+  cell_id,
+  cell_id_1,
+  median_v,
+  mode,
+  capacity,
+  time,
+  cycle,
+  start_v,
+  charge_v,
+  stepcurrent,
+  charged,
+  discharged
     ]
   }
 }

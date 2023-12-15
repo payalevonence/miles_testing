@@ -47,12 +47,14 @@ view: final_median_asr {
 
   measure: median_asr_charged1 {
     type: average
+    label: "charge"
     sql: (((${final_median_asr.median_v} - ${start_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
     filters: [mode: "118"]
   }
 
   measure: median_asr_discharged1 {
     type: average
+    label: "discharge"
     sql: (((${start_v} - ${final_median_asr.median_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
     filters: [mode: "117"]
   }
@@ -118,6 +120,7 @@ view: final_median_asr {
 
   dimension: median_asr_charged {
     type: number
+
     sql: (((${final_median_asr.median_v} - ${start_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
   }
 
