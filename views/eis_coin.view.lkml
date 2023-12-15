@@ -1,5 +1,5 @@
 view: eis_coin {
-  sql_table_name: `natrion-operational-data.data_test.eis_coin` ;;
+  sql_table_name: `natrion-operational-data.data.eis_coin` ;;
 
   dimension: cell_id {
     type: string

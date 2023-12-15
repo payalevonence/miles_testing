@@ -42,6 +42,12 @@ view: cell_test {
     type: string
     sql: ${TABLE}.test_date ;;
   }
+
+  dimension_group: testdate {
+    type: time
+    timeframes: [time, date, week, month, raw]
+    sql: ${TABLE}.test_date ;;
+  }
   dimension: user_id {
     type: string
     # hidden: yes

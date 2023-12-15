@@ -14,85 +14,9 @@ explore: pouch {}
 
 explore: coin {}
 
-explore: specific_capacity_vs_cycle {
-  join: cycle_table_sample  {
-    type: inner
-    sql_on: ${specific_capacity_vs_cycle.cell_build_cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: step_table_sample {
-  join: cell_test {
-    type: left_outer
-    sql_on: ${step_table_sample.cell_id} = ${cell_test.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: cycle_table_sample {
-    type: inner
-    sql_on: ${cycle_table_sample.cell_id} = ${step_table_sample.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: electrical_cycle_pouch {
-    type: inner
-    sql_on: ${step_table_sample.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: electrical_step_pouch {
-    type: inner
-    sql_on: ${step_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: specific_capacity_vs_cycle {
-    type: inner
-    sql_on: ${step_table_sample.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: cycle_table_sample {
-  join: cell_test {
-    type: inner
-    sql_on: ${cycle_table_sample.cell_id} = ${cell_test.cell_id} ;;
-    relationship: one_to_one
-  }
-
-  join: step_table_sample {
-    type: inner
-    sql_on: ${step_table_sample.cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: electrical_cycle_pouch {
-    type: inner
-    sql_on: ${cycle_table_sample.cell_id} = ${electrical_cycle_pouch.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: electrical_step_pouch {
-    type: inner
-    sql_on: ${cycle_table_sample.cell_id} = ${electrical_step_pouch.cell_id} ;;
-    relationship: many_to_one
-  }
-
-  join: specific_capacity_vs_cycle {
-    type: inner
-    sql_on: ${cycle_table_sample.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
-    relationship: many_to_one
-  }
-}
-
 
 explore: electrical_cycle_pouch {
-  join: cycle_table_sample {
-    type: inner
-    sql_on: ${electrical_cycle_pouch.cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: many_to_one
-  }
+
 
   join: electrical_step_pouch {
     type: inner
@@ -100,11 +24,6 @@ explore: electrical_cycle_pouch {
     relationship: many_to_one
   }
 
-  join: specific_capacity_vs_cycle {
-    type: inner
-    sql_on: ${electrical_cycle_pouch.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
-    relationship: many_to_one
-  }
 
   join: cell_test {
     type: inner
@@ -114,11 +33,7 @@ explore: electrical_cycle_pouch {
 }
 
 explore: electrical_step_pouch {
-  join: cycle_table_sample {
-    type: inner
-    sql_on: ${electrical_step_pouch.cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: many_to_one
-  }
+
 
   join: electrical_cycle_pouch {
     type: inner
@@ -126,11 +41,6 @@ explore: electrical_step_pouch {
     relationship: many_to_one
   }
 
-  join: specific_capacity_vs_cycle {
-    type: inner
-    sql_on: ${electrical_step_pouch.cell_id} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
-    relationship: many_to_one
-  }
 }
 
 
@@ -161,14 +71,7 @@ explore: electrical_cycle_coin {
 }
 
 
-
-
 explore: electrical_step_coin {}
-
-
-
-
-
 
 
 explore: electrode_mfg_coin {
@@ -201,11 +104,7 @@ explore: cell_build {
     relationship: one_to_one
   }
 
-  join: cycle_table_sample {
-    type: inner
-    sql_on: ${cell_build.cell_id} = ${cycle_table_sample.cell_id} ;;
-    relationship: one_to_one
-  }
+
 
   join: cell_test {
     type: inner
@@ -237,11 +136,7 @@ explore: cell_build {
     relationship: many_to_one
   }
 
-  join: specific_capacity_vs_cycle {
-    type: inner
-    sql_on: ${cell_build.cell_type} = ${specific_capacity_vs_cycle.cell_build_cell_id} ;;
-    relationship: many_to_one
-  }
+
 
 }
 
@@ -689,15 +584,9 @@ explore: lisic_slurries {
 }
 
 
-
-
-
-
 explore: median_asr_coin {}
-
-explore: pdt_medianasr {}
 explore: specific {}
 explore: final_median_asr {}
-explore: trial_median_asr {}
 explore: specific_eis_pouch {}
 explore: specific_coin {}
+explore: specific_eis_coin {}

@@ -45,20 +45,16 @@ view: final_median_asr {
     sql: ${cycle} * 1 ;;
   }
 
-  measure: asrch_unfiltered {
+  measure: median_asr_charged1 {
     type: average
-    label: "ASR_charge"
-    sql: ${final_median_asr.median_asr_charged} ;;
+    sql: (((${final_median_asr.median_v} - ${start_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
+    filters: [mode: "118"]
   }
 
-  filter: asrch_filter {
-    sql: final_median_asr.mode = "118"
-      }
-
-      measure: asrch {
-      type: average
-      filters: [asrch_filter]
-      sql: asrch_unfiltered ;;
+  measure: median_asr_discharged1 {
+    type: average
+    sql: (((${start_v} - ${final_median_asr.median_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
+    filters: [mode: "117"]
   }
 
 
@@ -124,6 +120,7 @@ view: final_median_asr {
     type: number
     sql: (((${final_median_asr.median_v} - ${start_v}) / ${final_median_asr.stepcurrent}) * ${final_median_asr.area_pouch}) / 1000 ;;
   }
+
 
   dimension: median_asr_discharged {
     type: number
