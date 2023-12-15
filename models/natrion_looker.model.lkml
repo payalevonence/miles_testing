@@ -44,8 +44,6 @@ explore: electrical_step_pouch {
 }
 
 
-explore: pouchsample {}
-
 explore: eis_coin {
   join: electrical_cycle_coin {
     type: inner
