@@ -11,7 +11,7 @@ view: specific_eis_pouch {
       electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers AS area_pouch,
       electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * eis_pouch.Zim as specific_zim,
       electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * eis_pouch.Zre as specific_zre
-      FROM `natrion-operational-data.data_test.eis_pouch`  AS eis_pouch
+      FROM `natrion-operational-data.data.eis_pouch`  AS eis_pouch
       INNER JOIN `natrion-operational-data.operational_data.pre_build_pouch`  AS pre_build_pouch ON eis_pouch.cell_id = pre_build_pouch.cell_id
       INNER JOIN `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id
       GROUP BY

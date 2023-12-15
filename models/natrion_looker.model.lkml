@@ -41,6 +41,12 @@ explore: electrical_step_pouch {
     relationship: many_to_one
   }
 
+  join: cell_test {
+    type: inner
+    sql_on: ${electrical_step_pouch.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_many
+  }
+
 }
 
 
@@ -594,5 +600,6 @@ explore: final_median_asr {}
 explore: specific_eis_pouch {}
 explore: specific_coin {}
 explore: specific_eis_coin {}
+
 
 explore: median_asr {}
