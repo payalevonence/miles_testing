@@ -25,8 +25,7 @@ view: specific_eis_pouch {
           8,
           9
       ORDER BY
-          1
-      LIMIT 500 ;;
+          1 ;;
   }
 
   measure: count {
