@@ -2,9 +2,9 @@
 view: specific_eis_coin {
   derived_table: {
     sql: SELECT
-                eis_coin.Zim  AS eis_pouch_zim,
-                eis_coin.Zre  AS eis_pouch_zre,
-                eis_coin.cell_id  AS eis_pouch_cell_id,
+                eis_coin.Zim  AS eis_coin_zim,
+                eis_coin.Zre  AS eis_coin_zre,
+                eis_coin.cell_id  AS eis_coin_cell_id,
                 eis_coin.Frequency  AS eis_pouch_frequency,
             electrode_mfg_coin.electrode_footprint  AS area_coin,
             electrode_mfg_coin.electrode_footprint * eis_coin.Zim as specific_zim,
@@ -40,24 +40,24 @@ view: specific_eis_coin {
     sql: ${TABLE}.specific_zre ;;
   }
 
-  dimension: eis_pouch_zim {
+  dimension: eis_coin_zim {
     type: number
-    sql: ${TABLE}.eis_pouch_zim ;;
+    sql: ${TABLE}.eis_coin_zim ;;
   }
 
-  dimension: eis_pouch_zre {
+  dimension: eis_coin_zre {
     type: number
-    sql: ${TABLE}.eis_pouch_zre ;;
+    sql: ${TABLE}.eis_coin_zre ;;
   }
 
-  dimension: eis_pouch_cell_id {
+  dimension: eis_coin_cell_id {
     type: string
-    sql: ${TABLE}.eis_pouch_cell_id ;;
+    sql: ${TABLE}.eis_coin_cell_id ;;
   }
 
-  dimension: eis_pouch_frequency {
+  dimension: eis_coin_frequency {
     type: number
-    sql: ${TABLE}.eis_pouch_frequency ;;
+    sql: ${TABLE}.eis_coin_frequency ;;
   }
 
   dimension: area_coin {
@@ -77,10 +77,10 @@ view: specific_eis_coin {
 
   set: detail {
     fields: [
-        eis_pouch_zim,
-  eis_pouch_zre,
-  eis_pouch_cell_id,
-  eis_pouch_frequency,
+        eis_coin_zim,
+  eis_coin_zre,
+  eis_coin_cell_id,
+  eis_coin_frequency,
   area_coin,
   specific_zim,
   specific_zre
