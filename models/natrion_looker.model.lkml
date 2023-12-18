@@ -14,7 +14,6 @@ explore: pouch {}
 
 explore: coin {}
 
-
 explore: electrical_cycle_pouch {
 
 

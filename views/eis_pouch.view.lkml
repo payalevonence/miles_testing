@@ -1,5 +1,5 @@
 view: eis_pouch {
-  sql_table_name: `natrion-operational-data.data_test.eis_pouch` ;;
+  sql_table_name: `natrion-operational-data.data.eis_pouch` ;;
 
   dimension: cell_id {
     type: string
@@ -36,7 +36,6 @@ view: eis_pouch {
     type: number
     sql: electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers * ${TABLE}.Zre ;;
   }
-
   measure: count {
     type: count
   }
