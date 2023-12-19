@@ -24,6 +24,7 @@ explore: electrical_cycle_pouch {
   }
 
 
+
   join: cell_test {
     type: inner
     sql_on: ${electrical_cycle_pouch.cell_id} = ${cell_test.cell_id} ;;
