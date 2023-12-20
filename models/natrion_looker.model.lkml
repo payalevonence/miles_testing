@@ -618,7 +618,16 @@ explore: specific {
   }
 }
 explore: final_median_asr {}
-explore: specific_eis_pouch {}
+
+explore: specific_eis_pouch {
+  join: cell_test {
+    type: left_outer
+    sql_on: ${specific_eis_pouch.eis_pouch_cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
+
+
 explore: specific_coin {
   join: cell_test {
     type: left_outer
@@ -626,7 +635,13 @@ explore: specific_coin {
     relationship: many_to_one
   }
 }
-explore: specific_eis_coin {}
+explore: specific_eis_coin {
+  join: cell_test {
+    type: left_outer
+    sql_on: ${specific_eis_coin.eis_coin_cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
 
 
 explore: median_asr {
