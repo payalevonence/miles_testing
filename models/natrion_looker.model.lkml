@@ -85,7 +85,7 @@ explore: electrical_cycle_coin {
 
 explore: electrical_step_coin {
   join: cell_test {
-    type: inner
+    type: left_outer
     sql_on: ${electrical_step_coin.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
@@ -602,18 +602,30 @@ explore: lisic_slurries {
 }
 
 
-explore: median_asr_coin {}
+explore: median_asr_coin {
+  join: cell_test {
+    type: left_outer
+    sql_on: ${median_asr_coin.cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: specific {
   join: cell_test {
     type: left_outer
-    sql: ${specific.cell_id} = ${cell_test.cell_id} ;;
+    sql_on: ${specific.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
 }
 explore: final_median_asr {}
 explore: specific_eis_pouch {}
-explore: specific_coin {}
+explore: specific_coin {
+  join: cell_test {
+    type: left_outer
+    sql_on: ${specific_coin.electrical_cycle_coin_cell_id} = ${cell_test.cell_id} ;;
+    relationship: many_to_one
+  }
+}
 explore: specific_eis_coin {}
 
 
