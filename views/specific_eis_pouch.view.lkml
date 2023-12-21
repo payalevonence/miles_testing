@@ -52,6 +52,11 @@ view: specific_eis_pouch {
     sql: ${TABLE}.eis_pouch_zim ;;
   }
 
+  dimension: soh {
+    type: string
+    sql: ${TABLE}.soh ;;
+  }
+
   dimension: eis_pouch_zre {
     type: number
     sql: ${TABLE}.eis_pouch_zre ;;
