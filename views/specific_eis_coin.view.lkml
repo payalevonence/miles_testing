@@ -6,6 +6,7 @@ view: specific_eis_coin {
                 eis_coin.Zre  AS eis_coin_zre,
                 eis_coin.cell_id  AS eis_coin_cell_id,
                 eis_coin.Frequency  AS eis_pouch_frequency,
+                eis_coin.soh AS soh,
             electrode_mfg_coin.electrode_footprint  AS area_coin,
             electrode_mfg_coin.electrode_footprint * eis_coin.Zim as specific_zim,
             electrode_mfg_coin.electrode_footprint * eis_coin.Zre as specific_zre
@@ -50,6 +51,11 @@ view: specific_eis_coin {
     sql: ${TABLE}.eis_coin_zre ;;
   }
 
+  dimension: soh {
+    type: string
+    sql: ${TABLE}.soh ;;
+  }
+
   dimension: eis_coin_cell_id {
     type: string
     sql: ${TABLE}.eis_coin_cell_id ;;
@@ -82,6 +88,7 @@ view: specific_eis_coin {
   eis_coin_cell_id,
   eis_coin_frequency,
   area_coin,
+  soh,
   specific_zim,
   specific_zre
     ]
