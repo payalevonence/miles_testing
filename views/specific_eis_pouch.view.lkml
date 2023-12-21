@@ -47,6 +47,7 @@ view: specific_eis_pouch {
 
 
 
+
   dimension: eis_pouch_zim {
     type: number
     sql: ${TABLE}.eis_pouch_zim ;;
