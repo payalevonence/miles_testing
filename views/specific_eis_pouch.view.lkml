@@ -6,6 +6,7 @@ view: specific_eis_pouch {
           eis_pouch.Zre  AS eis_pouch_zre,
           eis_pouch.cell_id  AS eis_pouch_cell_id,
           eis_pouch.Frequency  AS eis_pouch_frequency,
+          eis_pouch.soh AS soh,
           pre_build_pouch.number_of_layers  AS pre_build_pouch_number_of_layers,
       electrode_mfg_pouch.electrode_footprint  AS electrode_mfg_pouch_electrode_footprint,
       electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers AS area_pouch,
@@ -23,7 +24,8 @@ view: specific_eis_pouch {
           6,
           7,
           8,
-          9
+          9,
+          10
       ORDER BY
           1 ;;
   }
