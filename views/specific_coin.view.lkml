@@ -36,12 +36,12 @@ view: specific_coin {
 
   measure: capacity_c {
     type: average
-    sql: ${TABLE}.electrical_cycle_coin_capacity_c ;;
+    sql: ${TABLE}.specific_capacityC ;;
   }
 
   measure: capacity_d {
     type: average
-    sql: ${TABLE}.electrical_cycle_coin_capacity_d ;;
+    sql: ${TABLE}.specific_capacityD ;;
   }
 
   dimension: electrical_cycle_coin_capacity_c {
