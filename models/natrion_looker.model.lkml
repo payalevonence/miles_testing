@@ -89,6 +89,12 @@ explore: electrical_step_coin {
     sql_on: ${electrical_step_coin.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
+
+  join: electrical_cycle_coin {
+    type: left_outer
+    sql_on: ${electrical_step_coin.cell_id} = ${electrical_cycle_coin.cell_id} ;;
+    relationship: many_to_one
+  }
 }
 
 
