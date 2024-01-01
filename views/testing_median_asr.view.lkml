@@ -31,7 +31,18 @@ view: testing_median_asr {
             INNER JOIN
                 `natrion-operational-data.operational_data.pre_build_pouch` AS pre_build_pouch ON pre_build_pouch.cell_id = electrical_step_pouch.Cell_id
             INNER JOIN
-                `natrion-operational-data.operational_data.electrode_mfg_pouch` AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id;;
+                `natrion-operational-data.operational_data.electrode_mfg_pouch` AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id
+                group by 1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+                HAVING charged IS NOT NULL;;
   }
 
   measure: count {
