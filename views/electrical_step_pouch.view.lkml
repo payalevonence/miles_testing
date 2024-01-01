@@ -74,7 +74,10 @@ measure: average_delta_time  {
   type: average
   value_format: "0.00"
   label: "average_delta_time"
-  sql: ${TABLE}.Time/3600 * 60 ;;
+  #sql: ${TABLE}.Time/3600 * 60 IS NOT NULL ;;
+  sql: SELECT AVG(Time) / 60 AS average_delta_time
+    FROM ${TABLE}
+    WHERE Time IS NOT NULL ;;
 }
 
   measure: cycle_pouch {
