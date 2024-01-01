@@ -65,19 +65,17 @@ view: electrical_step_pouch {
 
   measure: delta_time1_ {
     type: average
-    label: "delta Time(minutes)"
+    label: "delta Time(minutes)1"
     value_format_name: decimal_0
     sql: ${TABLE}.Time/3600 * 60 ;;
   }
 
 measure: average_delta_time  {
-  type: average
+  type: number
   value_format: "0.00"
   label: "average_delta_time"
-  #sql: ${TABLE}.Time/3600 * 60 IS NOT NULL ;;
-  sql: SELECT AVG(Time) / 60 AS average_delta_time
-    FROM ${TABLE}
-    WHERE Time IS NOT NULL ;;
+  #sql: ${TABLE}.Time/3600 * 60 ;;
+  sql: AVG(CASE WHEN ${TABLE}.Time IS NOT NULL THEN ${TABLE}.Time/3600 * 60 END) ;;
 }
 
   measure: cycle_pouch {
