@@ -26,6 +26,7 @@ view: testing_specific {
                 7,
                 8,
                 9
+            HAVING specific_capacityC IS NOT NULL
 
       ORDER BY
       1 ;;
