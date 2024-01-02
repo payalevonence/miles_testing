@@ -28,9 +28,9 @@ view: testing_median_asr {
                 END AS discharged
             FROM
                  `natrion-operational-data.data.electrical_step_pouch` AS electrical_step_pouch
-            INNER JOIN
+            LEFT JOIN
                 `natrion-operational-data.operational_data.pre_build_pouch` AS pre_build_pouch ON pre_build_pouch.cell_id = electrical_step_pouch.Cell_id
-            INNER JOIN
+            LEFT JOIN
                 `natrion-operational-data.operational_data.electrode_mfg_pouch` AS electrode_mfg_pouch ON pre_build_pouch.cathode_id = electrode_mfg_pouch.electrode_id
                group by 1,
                 2,
