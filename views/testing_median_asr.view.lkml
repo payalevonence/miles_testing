@@ -41,8 +41,7 @@ view: testing_median_asr {
                 7,
                 8,
                 9,
-                10
-                HAVING charged IS NOT NULL and discharged IS NOT NULL ;;
+                10 ;;
   }
 
   measure: count {

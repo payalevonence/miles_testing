@@ -12,10 +12,10 @@ view: testing_specific {
                 electrical_cycle_pouch.CapacityC * 1000 / ((electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers) * casts.actual_mass_loading) as specific_capacityC,
                 electrical_cycle_pouch.CapacityD * 1000 / ((electrode_mfg_pouch.electrode_footprint * pre_build_pouch.number_of_layers) * casts.actual_mass_loading) as specific_capacityD
             FROM `natrion-operational-data.data.electrical_cycle_pouch` AS electrical_cycle_pouch
-            INNER JOIN `natrion-operational-data.operational_data.cell_build` AS cell_build ON cell_build.cell_id = electrical_cycle_pouch.Cell_Id
-            INNER JOIN `natrion-operational-data.operational_data.pre_build_pouch`  AS pre_build_pouch ON cell_build.cell_id = pre_build_pouch.cell_id
-            INNER JOIN `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON electrode_mfg_pouch.electrode_id = pre_build_pouch.cathode_id
-            INNER JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_pouch.cast_id = casts.cast_id
+            LEFT JOIN `natrion-operational-data.operational_data.cell_build` AS cell_build ON cell_build.cell_id = electrical_cycle_pouch.Cell_Id
+            LEFT JOIN `natrion-operational-data.operational_data.pre_build_pouch`  AS pre_build_pouch ON cell_build.cell_id = pre_build_pouch.cell_id
+            LEFT JOIN `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON electrode_mfg_pouch.electrode_id = pre_build_pouch.cathode_id
+            LEFT JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_pouch.cast_id = casts.cast_id
             GROUP BY
                 1,
                 2,
@@ -26,7 +26,6 @@ view: testing_specific {
                 7,
                 8,
                 9
-            HAVING specific_capacityC IS NOT NULL
 
       ORDER BY
       1 ;;
