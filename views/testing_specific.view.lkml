@@ -16,6 +16,7 @@ view: testing_specific {
             LEFT JOIN `natrion-operational-data.operational_data.pre_build_pouch`  AS pre_build_pouch ON cell_build.cell_id = pre_build_pouch.cell_id
             LEFT JOIN `natrion-operational-data.operational_data.electrode_mfg_pouch`  AS electrode_mfg_pouch ON electrode_mfg_pouch.electrode_id = pre_build_pouch.cathode_id
             LEFT JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_pouch.cast_id = casts.cast_id
+            WHERE  casts.actual_mass_loading IS NOT NULL AND electrode_mfg_pouch.electrode_footprint IS NOT NULL
             GROUP BY
                 1,
                 2,
@@ -26,6 +27,7 @@ view: testing_specific {
                 7,
                 8,
                 9
+      ---HAVING specific_capacityC IS NOT NULL and specific_capacityD IS NOT NULL
 
       ORDER BY
       1 ;;
