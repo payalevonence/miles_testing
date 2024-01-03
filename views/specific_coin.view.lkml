@@ -13,9 +13,10 @@ view: specific_coin {
           electrical_cycle_coin.CapacityC * 1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) as specific_capacityC,
           electrical_cycle_coin.CapacityD * 1000 / (electrode_mfg_coin.electrode_footprint * casts.actual_mass_loading) as specific_capacityD
       FROM `natrion-operational-data.data.electrical_cycle_coin`  AS electrical_cycle_coin
-      INNER JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON electrical_cycle_coin.Cell_Id = cell_build.cell_id
-      INNER JOIN `natrion-operational-data.operational_data.electrode_mfg_coin`  AS electrode_mfg_coin ON electrode_mfg_coin.electrode_id = cell_build.cathode_id
-      INNER JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_coin.cast_id = casts.cast_id
+      LEFT JOIN `natrion-operational-data.operational_data.cell_build`  AS cell_build ON electrical_cycle_coin.Cell_Id = cell_build.cell_id
+      LEFT JOIN `natrion-operational-data.operational_data.electrode_mfg_coin`  AS electrode_mfg_coin ON electrode_mfg_coin.electrode_id = cell_build.cathode_id
+      LEFT JOIN `natrion-operational-data.operational_data.casts`  AS casts ON electrode_mfg_coin.cast_id = casts.cast_id
+      WHERE  casts.actual_mass_loading IS NOT NULL AND electrode_mfg_coin.electrode_footprint IS NOT NULL
       GROUP BY
           1,
           2,
