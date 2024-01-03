@@ -24,13 +24,10 @@ view: median_asr_coin {
                     ELSE
                         NULL
                 END AS discharged
-            FROM
-                `natrion-operational-data.operational_data.cell_build` AS cell_build
-            INNER JOIN
-                `natrion-operational-data.operational_data.electrode_mfg_coin` AS electrode_mfg_coin ON cell_build.cathode_id = electrode_mfg_coin.electrode_id
+            FROM `natrion-operational-data.data.electrical_step_coin` AS electrical_step_coin
+            LEFT JOIN `natrion-operational-data.operational_data.cell_build` AS cell_build ON cell_build.cell_id = electrical_step_coin.Cell_id
+            LEFT JOIN `natrion-operational-data.operational_data.electrode_mfg_coin` AS electrode_mfg_coin ON cell_build.cathode_id = electrode_mfg_coin.electrode_id
 
-            INNER JOIN
-                `natrion-operational-data.data.electrical_step_coin` AS electrical_step_coin ON cell_build.cell_id = electrical_step_coin.Cell_id
                 where (electrical_step_coin.Capacity not in(0.0)) and (electrical_step_coin.Time not in(0.0)) and (electrical_step_coin.Mode = 117 or electrical_step_coin.Mode = 118)
                 order by electrical_step_coin.Capacity, electrical_step_coin.Time  ;;
   }
