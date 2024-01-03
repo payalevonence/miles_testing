@@ -616,10 +616,10 @@ explore: median_asr_coin {
   }
 }
 
-explore: specific {
+explore: specific_duplicate {
   join: cell_test {
     type: left_outer
-    sql_on: ${specific.cell_id} = ${cell_test.cell_id} ;;
+    sql_on: ${specific_duplicate.cell_id} = ${cell_test.cell_id} ;;
     relationship: many_to_one
   }
 }
@@ -658,6 +658,6 @@ explore: median_asr {
   }
 }
 
-explore: testing_specific {}
+explore: specific {}
 
 explore: testing_median_asr {}
